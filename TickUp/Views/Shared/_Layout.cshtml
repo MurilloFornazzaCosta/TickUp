@@ -22,13 +22,22 @@
                 </svg>
                 <h1 id="titulo">TickUp</h1>
             </a>
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="./public/criarEvento.html" class="nav-link">Criar evento</a></li>
-            </ul>
-            <div class="text-end">
-                <a href="/public/login.html"><button type="button" class="btn btn-outline-primary me-2">Entrar</button></a>
-                <a href="/public/Cadastro.html"><button type="button" class="btn btn-primary">Cadastrar</button></a>
-            </div>
+          <ul class="nav nav-pills">
+    <li class="nav-item">
+        <a asp-controller="Evento" asp-action="Criar" class="nav-link">Criar evento</a>
+    </li>
+</ul>
+
+<div class="text-end">
+    <a asp-controller="Home" asp-action="Login">
+        <button type="button" class="btn btn-outline-primary me-2">Entrar</button>
+    </a>
+
+    <a href="/public/Cadastro.html">
+        <button type="button" class="btn btn-primary">Cadastrar</button>
+    </a>
+</div>
+
         </header>
     </div>
 
