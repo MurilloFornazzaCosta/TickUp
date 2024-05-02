@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TickUp", "TickUp\TickUp.csproj", "{802C0790-6325-4B4C-AD2D-608303BFBEFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{802C0790-6325-4B4C-AD2D-608303BFBEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{802C0790-6325-4B4C-AD2D-608303BFBEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{802C0790-6325-4B4C-AD2D-608303BFBEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{802C0790-6325-4B4C-AD2D-608303BFBEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D7A0730-F200-478E-8E80-7364CC6BEF94}
+	EndGlobalSection
+EndGlobal
