@@ -5,7 +5,6 @@ namespace TickUp.Models
     public class Evento
     {
 
-        static string conexao = "Server=localhost; Database=tickup;User id=root;Password=2005";
         private string assuntoEvento, categoriaEvento, nomeEvento, idEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino;
         private int capacidade;
 
@@ -39,7 +38,7 @@ namespace TickUp.Models
         public string Inserir()
         {
 
-            MySqlConnection con = new MySqlConnection(conexao);
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();

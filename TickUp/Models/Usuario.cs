@@ -5,7 +5,6 @@ namespace TickUp.Models
     public class Usuario
     {
 
-        static string conexao = "Server=localhost;Database=tickup;User id=root;Password=2005";
         private string emailUser, cpfUser, nomeUser, telefoneUser, senhaUser;
         private int idadeUser;
 
@@ -30,7 +29,7 @@ namespace TickUp.Models
 
         public string InserirUsuario()
         {
-            MySqlConnection con = new MySqlConnection(conexao);
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();
@@ -52,5 +51,6 @@ namespace TickUp.Models
 
             return "Usuario inserido com sucesso!";
         }
+
     }
 }

@@ -17,5 +17,5 @@ namespace TickUp.Controllers
             return RedirectToAction("Cadastrar");
         }
     }
-           
+
 }
