@@ -35,7 +35,6 @@ namespace TickUp.Models
                 con.Open();
                 MySqlCommand qry = new MySqlCommand(
                     "INSERT INTO usuarios VALUES(@email, @cpf, @idade, @nome, @telefone, @senha)", con);
-
                 qry.Parameters.AddWithValue("@email", email);
                 qry.Parameters.AddWithValue("@cpf", cpf);
                 qry.Parameters.AddWithValue("@idade", idade);
