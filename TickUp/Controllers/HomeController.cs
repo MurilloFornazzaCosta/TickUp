@@ -22,10 +22,7 @@ namespace TickUp.Controllers
         {
             return View();
         }
-        public IActionResult CriarEvento()
-        {
-            return View();
-        }
+
         public IActionResult Cadastrar()
         {
             return View();

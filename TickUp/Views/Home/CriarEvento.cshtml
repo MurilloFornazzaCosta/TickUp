@@ -1,4 +1,4 @@
-﻿
+﻿@model TickUp.Models.Evento
 @{
     ViewData["Title"] = "CriarEvento";
 }
@@ -19,13 +19,13 @@
     <main>
       <div class="col-md-7 col-lg-8">
         
-        <form class="needs-validation" novalidate="">
+        <form class="needs-validation" novalidate="" method="post">
           <h4 class="mb-3">1. Onde o seu evento vai acontecer?</h4>
           <div class="row g-3">
 
             <div class="col-12">
               <label for="endereco" class="form-label">Informe o endereço</label>
-              <input type="address" class="form-control" id="endereco" placeholder="Endereço">
+                <input asp-for="AssuntoEvento" name="assuntoEvento" type="address" class="form-control" id="endereco" placeholder="Endereço">
               <div class="invalid-feedback">
                 Please enter a valid address address for shipping updates.
               </div>
@@ -33,7 +33,7 @@
 
             <div class="col-12">
               <label for="nomeLocal" class="form-label">Nome do Local</label>
-              <input type="text" class="form-control" id="nomeLocal" required="">
+                <input asp-for="CategoriaEvento" name="categoriaEvento" type="text" class="form-control" id="nomeLocal" required="">
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -41,7 +41,7 @@
 
             <div class="col-12">
               <label for="cep" class="form-label">CEP</label>
-              <input type="number" class="form-control" id="cep" required="">
+                <input asp-for="Capacidade" name="capacidade" type="number" class="form-control" id="cep" required="">
               <div class="invalid-feedback">
                 Please enter your cep.
               </div>
@@ -49,7 +49,7 @@
 
             <div class="col-12">
               <label for="numero" class="form-label">Av./Rua</label>
-              <input type="text" class="form-control" id="numero" required="">
+                <input asp-for="EmailContato" name="emailContato" type="text" class="form-control" id="numero" required="">
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -57,7 +57,7 @@
 
             <div class="col-12">
               <label for="cep" class="form-label">Número</label>
-              <input type="number" class="form-control" id="cep" required="">
+              <input asp-for="IdEvento" name="idEvento" type="number" class="form-control" id="cep" required="">
               <div class="invalid-feedback">
                 Please enter your cep.
               </div>
@@ -65,7 +65,7 @@
 
             <div class="col-12">
               <label for="complemento" class="form-label">Complemento</label>
-              <input type="text" class="form-control" id="complemento" required="">
+              <input asp-for="Observacoes" name="observacoes" type="text" class="form-control" id="complemento" required="">
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -73,11 +73,37 @@
 
             <div class="col-12">
               <label for="bairro" class="form-label">Bairro</label>
-              <input type="text" class="form-control" id="bairro" required="">
+                <input asp-for="DataInicio" name="dataInicio" type="text" class="form-control" id="bairro" required="">
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
             </div>
+
+            <div class="col-12">
+              <label for="bairro" class="form-label">Bairro</label>
+                <input asp-for="DataTermino" name="dataTermino" type="text" class="form-control" id="bairro" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="bairro" class="form-label">Bairro</label>
+                <input asp-for="HorarioInicio" name="horarioInicio" type="text" class="form-control" id="bairro" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="bairro" class="form-label">Bairro</label>
+                <input asp-for="HorarioTermino" name="horarioTermino" type="text" class="form-control" id="bairro" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+       
 
             <div class="col-md-6">
               <label for="estado" class="form-label">Estado</label>
@@ -134,7 +160,7 @@
           <div class="row g-3">
             <div class="col-12">
               <label for="nomeEvento" class="form-label">Nome do evento</label>
-              <input type="text" class="form-control" id="nomeEvento" required="">
+              <input asp-for="NomeEvento" name="nomeEvento" type="text" class="form-control" id="nomeEvento" required="">
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
