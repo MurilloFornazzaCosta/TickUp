@@ -5,7 +5,7 @@ namespace TickUp.Models
     public class Evento
     {
 
-        static string conexao = "Server=localhost; Database=tickup;User id=root;Password=102938";
+        static string conexao = "Server=localhost; Database=tickup;User id=root;Password=2005";
         private string assuntoEvento, categoriaEvento, nomeEvento, idEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino;
         private int capacidade;
 

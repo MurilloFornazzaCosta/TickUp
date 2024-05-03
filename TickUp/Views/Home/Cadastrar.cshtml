@@ -1,6 +1,6 @@
-﻿
+﻿@model TickUp.Models.Usuario
 @{
-    ViewData["Title"] = "CriarEvento";
+    ViewData["Title"] = "Cadastrar";
 }
 
 
@@ -23,25 +23,18 @@
           <h4 class="mb-3">Crie o seu perfil</h4>
           <form class="needs-validation" novalidate="">
             <div class="row g-3">
-              <div class="col-sm-6">
-                <label for="firstName" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+
+              <div class="col-sm-12">
+                <label for="name" class="form-label">Nome completo</label>
+                <input asp-for="Nome" name="nome" type="text" class="form-control" id="nomeUsuario" required="">
                 <div class="invalid-feedback">
                   Valid first name is required.
-                </div>
-              </div>
-  
-              <div class="col-sm-6">
-                <label for="lastName" class="form-label">Sobrenome</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                <div class="invalid-feedback">
-                  Valid last name is required.
                 </div>
               </div>
 
               <div class="col-12">
                 <label for="cpf" class="form-label">CPF <span class="text-body-secondary"></span></label>
-                <input type="cpf" class="form-control" id="cpf" placeholder="###.###.###-##">
+                <input asp-for="Cpf" name="cpf" type="text" class="form-control" id="nomeLocal" placeholder="###.###.###-##">
                 <div class="invalid-feedback">
                   Please enter a valid email address for shipping updates.
                 </div>
@@ -49,7 +42,7 @@
   
               <div class="col-12">
                 <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-                <input type="email" class="form-control" id="email" placeholder="email@exemplo.com">
+                 <input asp-for="Email" name="email" type="text" class="form-control" id="email" placeholder="email@exemplo.com">
                 <div class="invalid-feedback">
                   Please enter a valid email address for shipping updates.
                 </div>
@@ -57,7 +50,7 @@
 
               <div class="col-12">
                 <label for="password" class="form-label">Senha <span class="text-body-secondary"></span></label>
-                <input type="password" class="form-control" id="password">
+                 <input asp-for="Senha" name="senha" type="password" class="form-control" id="senha">   
                 <div class="invalid-feedback">
                   Please enter a valid email address for shipping updates.
                 </div>
@@ -65,7 +58,7 @@
   
               <div class="col-12">
                 <label for="date" class="form-label">Data de nascimento</label>
-                <input type="date" class="form-control" id="date" required="">
+                <input asp-for="Idade" name="idade" type="number" class="form-control" id="idade" required="">
                 <div class="invalid-feedback">
                   Please enter your shipping address.
                 </div>
@@ -73,7 +66,7 @@
 
               <div class="col-12">
                 <label for="telephone" class="form-label">Telefone</label>
-                <input type="telephone" class="form-control" id="telephone" placeholder="(##) #####-####" required="">
+                <input asp-for="Telefone" name="telefone" type="tel" class="form-control" id="telefone" placeholder="(##) #####-####">
                 <div class="invalid-feedback">
                   Please enter your shipping address.
                 </div>
