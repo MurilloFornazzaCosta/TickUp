@@ -6,41 +6,42 @@ namespace TickUp.Models
     {
 
         static string conexao = "Server=localhost;Database=tickup;User id=root;Password=2005";
-        private string email, cpf, nome, telefone, senha;
-        private int idade;
+        private string emailUser, cpfUser, nomeUser, telefoneUser, senhaUser;
+        private int idadeUser;
 
-        public Usuario(string email, string cpf, string nome, string telefone, string senha, int idade)
+
+        public string EmailUser { get => emailUser; set => emailUser = value; }
+        public string CpfUser { get => cpfUser; set => cpfUser = value; }
+        public string NomeUser { get => nomeUser; set => nomeUser = value; }
+        public string TelefoneUser { get => telefoneUser; set => telefoneUser = value; }
+        public string SenhaUser { get => senhaUser; set => senhaUser = value; }
+        public int IdadeUser { get => idadeUser; set => idadeUser = value; }
+
+        public Usuario(string emailUser, string cpfUser, string nomeUser, string telefoneUser, string senhaUser, int idadeUser)
         {
-            this.email = email;
-            this.cpf = cpf;
-            this.nome = nome;
-            this.telefone = telefone;
-            this.senha = senha;
-            this.idade = idade;
+            this.emailUser = emailUser;
+            this.cpfUser = cpfUser;
+            this.nomeUser = nomeUser;
+            this.telefoneUser = telefoneUser;
+            this.senhaUser = senhaUser;
+            this.idadeUser = idadeUser;
+
         }
 
-        public string Email { get => email; set => email = value; }
-        public string Cpf { get => cpf; set => cpf = value; }
-        public string Nome { get => nome; set => nome = value; }
-        public string Telefone { get => telefone; set => telefone = value; }
-        public string Senha { get => senha; set => senha = value; }
-        public int Idade { get => idade; set => idade = value; }
-
-
-        public string InserirUSuario()
+        public string InserirUsuario()
         {
             MySqlConnection con = new MySqlConnection(conexao);
             try
             {
                 con.Open();
                 MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO usuarios VALUES(@email, @cpf, @idade, @nome, @telefone, @senha)", con);
-                qry.Parameters.AddWithValue("@email", email);
-                qry.Parameters.AddWithValue("@cpf", cpf);
-                qry.Parameters.AddWithValue("@idade", idade);
-                qry.Parameters.AddWithValue("@nome", nome);
-                qry.Parameters.AddWithValue("@telefone", telefone);
-                qry.Parameters.AddWithValue("@senha", senha);
+                    "INSERT INTO usuarios VALUES(@email, @cpf, @nome, @telefone, @senha, @idade)", con);
+                qry.Parameters.AddWithValue("@email", emailUser);
+                qry.Parameters.AddWithValue("@cpf", cpfUser);
+                qry.Parameters.AddWithValue("@idade", idadeUser);
+                qry.Parameters.AddWithValue("@nome", nomeUser);
+                qry.Parameters.AddWithValue("@telefone", telefoneUser);
+                qry.Parameters.AddWithValue("@senha", senhaUser);
                 qry.ExecuteNonQuery();
                 con.Close();
             }
