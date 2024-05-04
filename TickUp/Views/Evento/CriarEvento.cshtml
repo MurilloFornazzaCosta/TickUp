@@ -17,190 +17,242 @@
 <body>
   
     <main>
-      <div class="col-md-7 col-lg-8">
-        
-        <form class="needs-validation" novalidate="" method="post">
-          <h4 class="mb-3">1. Onde o seu evento vai acontecer?</h4>
-          <div class="row g-3">
+        <div class="col-md-7 col-lg-8">
 
-            <div class="col-12">
-              <label for="endereco" class="form-label">Informe o endereço</label>
-                <input asp-for="AssuntoEvento" name="assuntoEvento" type="address" class="form-control" id="endereco" placeholder="Endereço">
-              <div class="invalid-feedback">
-                Please enter a valid address address for shipping updates.
-              </div>
-            </div>
+            <form class="needs-validation" enctype="multipart/form-data" method="post" novalidate="">
+                <h4 class="mb-3">1. Onde o seu evento vai acontecer?</h4>
+                <div class="row g-3">
 
-            <div class="col-12">
-              <label for="nomeLocal" class="form-label">Nome do Local</label>
-                <input asp-for="CategoriaEvento" name="categoriaEvento" type="text" class="form-control" id="nomeLocal" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                    <div class="col-12">
+                        <label for="endereco" class="form-label">Informe o endereço</label>
+                        <input type="address" class="form-control" id="endereco" placeholder="Endereço">
+                        <div class="invalid-feedback">
+                            Please enter a valid address address for shipping updates.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="cep" class="form-label">CEP</label>
-                <input asp-for="Capacidade" name="capacidade" type="number" class="form-control" id="cep" required="">
-              <div class="invalid-feedback">
-                Please enter your cep.
-              </div>
-            </div>
+                    <div class="col-12">
+                        <label for="nomeLocal" class="form-label">Nome do Local</label>
+                        <input type="text" class="form-control" id="nomeLocal" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="numero" class="form-label">Av./Rua</label>
-                <input asp-for="EmailContato" name="emailContato" type="text" class="form-control" id="numero" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                    <div class="col-12">
+                        <label for="cep" class="form-label">CEP</label>
+                        <input type="number" class="form-control" id="cep" required="">
+                        <div class="invalid-feedback">
+                            Please enter your cep.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="cep" class="form-label">Número</label>
-              <input asp-for="IdEvento" name="idEvento" type="number" class="form-control" id="cep" required="">
-              <div class="invalid-feedback">
-                Please enter your cep.
-              </div>
-            </div>
+                    <div class="col-12">
+                        <label for="numero" class="form-label">Av./Rua</label>
+                        <input type="text" class="form-control" id="numero" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="complemento" class="form-label">Complemento</label>
-              <input asp-for="Observacoes" name="observacoes" type="text" class="form-control" id="complemento" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Número</label>
+                        <input type="number" class="form-control" id="cep" required="">
+                        <div class="invalid-feedback">
+                            Please enter your cep.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="bairro" class="form-label">Bairro</label>
-                <input asp-for="DataInicio" name="dataInicio" type="text" class="form-control" id="bairro" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                    <div class="col-12">
+                        <label for="complemento" class="form-label">Complemento</label>
+                        <input type="text" class="form-control" id="complemento" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="bairro" class="form-label">Bairro</label>
-                <input asp-for="DataTermino" name="dataTermino" type="text" class="form-control" id="bairro" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                    <div class="col-12">
+                        <label for="bairro" class="form-label">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="bairro" class="form-label">Bairro</label>
-                <input asp-for="HorarioInicio" name="horarioInicio" type="text" class="form-control" id="bairro" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" required="">
+                            <option value="">Escolha...</option>
+                            <option>Acre</option>
+                            <option>Alagoas</option>
+                            <option>Amapá</option>
+                            <option>Amazonas</option>
+                            <option>Bahia</option>
+                            <option>Ceará</option>
+                            <option>Distrito Federal</option>
+                            <option>Espírito Santo</option>
+                            <option>Goiás</option>
+                            <option>Maranhão</option>
+                            <option>Mato Grosso</option>
+                            <option>Mato Grosso do Sul</option>
+                            <option>Minas Gerais</option>
+                            <option>Pará</option>
+                            <option>Paraíba</option>
+                            <option>Paraná</option>
+                            <option>Pernambuco</option>
+                            <option>Piauí</option>
+                            <option>Rio de Janeiro</option>
+                            <option>Rio Grande do Norte</option>
+                            <option>Rio Grande do Sul</option>
+                            <option>Rondônia</option>
+                            <option>Roraima</option>
+                            <option>Santa Catarina</option>
+                            <option>São Paulo</option>
+                            <option>Sergipe</option>
+                            <option>Tocantins</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid state.
+                        </div>
+                    </div>
 
-            <div class="col-12">
-              <label for="bairro" class="form-label">Bairro</label>
-                <input asp-for="HorarioTermino" name="horarioTermino" type="text" class="form-control" id="bairro" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                    <div class="col-md-6">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <select class="form-select" id="cidade" required="">
+                            <option value="">Escolha...</option>
+                            <option>Exemplo</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please provide a valid state.
+                        </div>
+                    </div>
 
-       
+                </div>
+                <hr class="my-4">
 
-            <div class="col-md-6">
-              <label for="estado" class="form-label">Estado</label>
-              <select class="form-select" id="estado" required="">
-                <option value="">Escolha...</option>
-                <option>Acre</option>
-                <option>Alagoas</option>
-                <option>Amapá</option>
-                <option>Amazonas</option>
-                <option>Bahia</option>
-                <option>Ceará</option>
-                <option>Distrito Federal</option>
-                <option>Espírito Santo</option>
-                <option>Goiás</option>
-                <option>Maranhão</option>
-                <option>Mato Grosso</option>
-                <option>Mato Grosso do Sul</option>
-                <option>Minas Gerais</option>
-                <option>Pará</option>
-                <option>Paraíba</option>
-                <option>Paraná</option>
-                <option>Pernambuco</option>
-                <option>Piauí</option>
-                <option>Rio de Janeiro</option>
-                <option>Rio Grande do Norte</option>
-                <option>Rio Grande do Sul</option>
-                <option>Rondônia</option>
-                <option>Roraima</option>
-                <option>Santa Catarina</option>
-                <option>São Paulo</option>
-                <option>Sergipe</option>
-                <option>Tocantins</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid state.
-              </div>
-            </div>
+                <h4 class="mb-3">2. Informações básicas</h4>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="nomeEvento" class="form-label">Nome do evento</label>
+                        <input asp-for="NomeEvento" name="nomeEvento" type="text" class="form-control" id="nomeEvento" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
 
-            <div class="col-md-6">
-              <label for="cidade" class="form-label">Cidade</label>
-              <select class="form-select" id="cidade" required="">
-                <option value="">Escolha...</option>
-                <option>Exemplo</option>
-              </select>
-              <div class="invalid-feedback">
-                Please provide a valid state.
-              </div>
-            </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Imagem de divulgação</label>
+                        <input class="form-control" type="file" name="imagem" id="formFile">
+                    </div>
+                    <p class="text-secondary">
+                        A dimensão recomendada é de <span class="text-danger">1600 x 838</span>
+                        (mesma proporção do formato utilizado nas páginas de evento no Facebook).
+                        Formato <span class="text-danger">JPEG, GIF ou PNG de no máximo 2MB</span> .
+                        Imagens com dimensões diferentes serão redimensionadas.
+                    </p>
 
-          </div>
-          <hr class="my-4">
+                    <select asp-for="AssuntoEvento" name="assuntoEvento" class="form-select" aria-label="Default select example">
+                        <option selected>Assunto</option>
+                        <option value="1">Baile funk</option>
+                    </select>
+                    <select asp-for="CategoriaEvento" name="categoriaEvento" class="form-select" aria-label="Default select example">
+                        <option selected>Categoria</option>
+                        <option value="1">Show</option>
+                    </select>
 
-          <h4 class="mb-3">2. Informações básicas</h4>
-          <div class="row g-3">
-            <div class="col-12">
-              <label for="nomeEvento" class="form-label">Nome do evento</label>
-              <input asp-for="NomeEvento" name="nomeEvento" type="text" class="form-control" id="nomeEvento" required="">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
+                </div>
 
-            <div class="mb-3">
-              <label for="formFile" class="form-label">Imagem de divulgação</label>
-              <input class="form-control" type="file" id="formFile">
-            </div>
-            <p class="text-secondary">A dimensão recomendada é de <span class="text-danger">1600 x 838</span> 
-              (mesma proporção do formato utilizado nas páginas de evento no Facebook).
-              Formato <span class="text-danger">JPEG, GIF ou PNG de no máximo 2MB</span> .
-              Imagens com dimensões diferentes serão redimensionadas.</p>
+                <hr class="my-4">
 
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Assunto</option>
-                <option value="1">...</option>
-              </select>
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Categoria</option>
-                <option value="1">...</option>
-              </select>
+                <h4 class="mb-3">3. Descrição do evento</h4>
+                <div class="row g-3">
 
-          </div>
+                    <div class="form-floating">
+                        <textarea asp-for="Observacoes" name="observacoes" class="form-control" id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">Conte todos os detalhes do seu evento!</label>
+                    </div>
+                </div>
 
-          <hr class="my-4">
+                <hr class="my-4">
 
-          <h4 class="mb-3">3. Descrição do evento</h4>
-          <div class="row g-3">
+                <h4 class="mb-3">4. Data e horário</h4>
+                <div class="row g-3">
 
-            <div class="form-floating">
-              <textarea class="form-control" id="floatingTextarea"></textarea>
-              <label for="floatingTextarea">Conte todos os detalhes do seu evento!</label>
-            </div>
-          </div>
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Data de início</label>
+                        <input asp-for="DataInicio" name="dataInicio" type="date" class="form-control" id="dataInicio" required="">
+                        <div class="invalid-feedback">
+                            Insira a data de início
+                        </div>
+                    </div>
 
-          <hr class="my-4">
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Criar evento</button>
-        </form>
-      </div>
+                    <div class="col-12">
+                        <label for="complemento" class="form-label">Hora de início</label>
+                        <input asp-for="HorarioInicio" name="horarioInicio" type="datetime" class="form-control" id="horaTermino" required="">
+                        <div class="invalid-feedback">
+                            Insira a hora de início
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Data de término</label>
+                        <input asp-for="DataTermino" name="dataTermino" type="date" class="form-control" id="dataTermino" required="">
+                        <div class="invalid-feedback">
+                            Insira a data de término
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="complemento" class="form-label">Hora de término</label>
+                        <input asp-for="HorarioTermino" name="horarioTermino" type="datetime" class="form-control" id="horaTermino" required="">
+                        <div class="invalid-feedback">
+                            Insira a hora de término
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h4 class="mb-3">5. Ingresso</h4>
+                <div class="row g-3">
+
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Título do ingresso</label>
+                        <input type="text" class="form-control" id="ingresso" required="">
+                        <div class="invalid-feedback">
+                            Insira o título do ingresso
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="complemento" class="form-label">Quantidade</label>
+                        <input asp-for="Capacidade" name="capacidade" type="number" class="form-control" id="quantidade" required="">
+                        <div class="invalid-feedback">
+                            Insira a quantidade
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Preço</label>
+                        <input type="number" class="form-control" id="preco" required="">
+                        <div class="invalid-feedback">
+                            Insira o preço
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Email para contato</label>
+                        <input asp-for="EmailContato" name="emailContato" type="text" class="form-control" id="preco" required="">
+                        <div class="invalid-feedback">
+                            Insira o email
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Criar evento</button>
+            </form>
+        </div>
     </main>
 
     </div>
