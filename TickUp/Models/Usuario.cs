@@ -4,10 +4,8 @@ namespace TickUp.Models
 {
     public class Usuario
     {
-
         private string emailUser, cpfUser, nomeUser, telefoneUser, senhaUser;
         private int idadeUser;
-
 
         public string EmailUser { get => emailUser; set => emailUser = value; }
         public string CpfUser { get => cpfUser; set => cpfUser = value; }
@@ -16,7 +14,9 @@ namespace TickUp.Models
         public string SenhaUser { get => senhaUser; set => senhaUser = value; }
         public int IdadeUser { get => idadeUser; set => idadeUser = value; }
 
-        public Usuario(string emailUser, string cpfUser, string nomeUser, string telefoneUser, string senhaUser, int idadeUser)
+
+        public Usuario(string emailUser, string cpfUser, string nomeUser, string telefoneUser,
+                       string senhaUser, int idadeUser)
         {
             this.emailUser = emailUser;
             this.cpfUser = cpfUser;
@@ -24,7 +24,6 @@ namespace TickUp.Models
             this.telefoneUser = telefoneUser;
             this.senhaUser = senhaUser;
             this.idadeUser = idadeUser;
-
         }
 
         public string InserirUsuario()
@@ -34,23 +33,56 @@ namespace TickUp.Models
             {
                 con.Open();
                 MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO usuarios VALUES(@email, @cpf, @nome, @telefone, @senha, @idade)", con);
-                qry.Parameters.AddWithValue("@email", emailUser);
-                qry.Parameters.AddWithValue("@cpf", cpfUser);
-                qry.Parameters.AddWithValue("@idade", idadeUser);
-                qry.Parameters.AddWithValue("@nome", nomeUser);
-                qry.Parameters.AddWithValue("@telefone", telefoneUser);
-                qry.Parameters.AddWithValue("@senha", senhaUser);
+                    "INSERT INTO usuarios (emailUser, cpfUser, nomeUser, telefoneUser, senhaUser, idadeUser) VALUES (@Email, @Cpf, @Nome, @Telefone, @Senha, @Idade)", con);
+                qry.Parameters.AddWithValue("@Email", emailUser);
+                qry.Parameters.AddWithValue("@Cpf", cpfUser);
+                qry.Parameters.AddWithValue("@Nome", nomeUser);
+                qry.Parameters.AddWithValue("@Telefone", telefoneUser);
+                qry.Parameters.AddWithValue("@Senha", senhaUser);
+                qry.Parameters.AddWithValue("@Idade", idadeUser);
+
                 qry.ExecuteNonQuery();
-                con.Close();
+
+                return "Usuário inserido com sucesso!";
             }
             catch (Exception ex)
             {
-                return "Erro: " + ex.InnerException;
+                return $"Erro ao inserir usuário: {ex.Message}"; // Mensagem genérica para depuração
             }
-
-            return "Usuario inserido com sucesso!";
+            finally
+            {
+                con.Close(); // Sempre fechar a conexão no bloco `finally`
+            }
         }
 
+        public static bool Login( Usuario usuario)
+        {
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            try
+            {
+                con.Open();
+
+                string query = "SELECT COUNT(*) FROM usuarios WHERE email = @email AND senha = @senha";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@email", usuario.EmailUser);
+                    cmd.Parameters.AddWithValue("@senha", usuario.SenhaUser);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0; // Retorna verdadeiro se um usuário for encontrado
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao executar login: {ex.Message}"); // Mensagem genérica
+                return false; 
+            }
+            finally
+            {
+                con.Close(); // Assegure-se de fechar a conexão
+            }
+        }
     }
 }
