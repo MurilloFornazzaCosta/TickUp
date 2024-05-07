@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TickUp.Models; // Use seu namespace correto
+using MySqlX.XDevAPI;
+using Newtonsoft.Json;
+using System.IO.MemoryMappedFiles;
+using System.Text.Json.Serialization;
+using TickUp.Models; 
 
 namespace TickUp.Controllers
 {
@@ -7,7 +11,6 @@ namespace TickUp.Controllers
     {
         public IActionResult Cadastrar()
         {
-            // Se TempData contém mensagem, passamos para a view
             if (TempData.ContainsKey("msg"))
             {
                 ViewBag.Message = TempData["msg"];
@@ -17,7 +20,6 @@ namespace TickUp.Controllers
 
         public IActionResult Login()
         {
-            // Se ViewBag contém mensagem de erro, exibimos na view
             if (ViewBag.ErrorMessage != null)
             {
                 ViewBag.ErrorMessage = ViewBag.ErrorMessage;
@@ -36,13 +38,13 @@ namespace TickUp.Controllers
         [HttpPost]
         public IActionResult Login(string emailUser, string senhaUser)
         {
-            Usuario usuarioParaLogin = new Usuario(emailUser, "", "", "", senhaUser, 0);
+            Usuario usuario = new Usuario(emailUser, "", "", "", senhaUser, 0);
 
-            bool loginBemSucedido = Usuario.Login(usuarioParaLogin);
-
+            bool loginBemSucedido = Usuario.Login(usuario);
 
             if (loginBemSucedido)
             {
+                HttpContext.Session.SetString("user", JsonConvert.SerializeObject(usuario));
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -51,9 +53,20 @@ namespace TickUp.Controllers
                 return View();
             }
         }
+        public IActionResult Logout()
+        {
+            var userSession = HttpContext.Session.GetString("user");
 
+            if (userSession != null)
+            {
+                Usuario sairUsuario = JsonConvert.DeserializeObject<Usuario>(userSession);
 
+                HttpContext.Session.Remove("user");
+            }
 
-    }
+            return RedirectToAction("Index", "Home");
+        }
+
+      }
 
 }

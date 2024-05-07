@@ -29,9 +29,18 @@
 </ul>
 
 <div class="text-end">
-    <a asp-controller="Usuario" asp-action="Login">
-        <button type="button" class="btn btn-outline-primary me-2">Entrar</button>
-    </a>
+                @if (Context.Session.GetString("user") == null)
+                {
+                    <a asp-controller="Usuario" asp-action="Login">
+                        <button type="button" class="btn btn-outline-primary me-2">Entrar</button>
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Usuario" asp-action="Logout">
+                        <button type="button" class="btn btn-outline-primary me-2">Sair</button>
+                    </a>
+                }
 
                 <a asp-controller="Usuario" asp-action="Cadastrar">
                     <button type="button" class="btn btn-primary">Cadastrar</button>

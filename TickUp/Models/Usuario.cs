@@ -33,7 +33,7 @@ namespace TickUp.Models
             {
                 con.Open();
                 MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO usuarios (emailUser, cpfUser, nomeUser, telefoneUser, senhaUser, idadeUser) VALUES (@Email, @Cpf, @Nome, @Telefone, @Senha, @Idade)", con);
+                    "INSERT INTO usuarios (email, cpf, nome, telefone, senha, idade) VALUES (@Email, @Cpf, @Nome, @Telefone, @Senha, @Idade)", con);
                 qry.Parameters.AddWithValue("@Email", emailUser);
                 qry.Parameters.AddWithValue("@Cpf", cpfUser);
                 qry.Parameters.AddWithValue("@Nome", nomeUser);
@@ -47,11 +47,11 @@ namespace TickUp.Models
             }
             catch (Exception ex)
             {
-                return $"Erro ao inserir usuário: {ex.Message}"; // Mensagem genérica para depuração
+                return $"Erro ao inserir usuário: {ex.Message}"; 
             }
             finally
             {
-                con.Close(); // Sempre fechar a conexão no bloco `finally`
+                con.Close(); 
             }
         }
 
@@ -71,17 +71,17 @@ namespace TickUp.Models
 
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    return count > 0; // Retorna verdadeiro se um usuário for encontrado
+                    return count > 0;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao executar login: {ex.Message}"); // Mensagem genérica
+                Console.WriteLine($"Erro ao executar login: {ex.Message}"); 
                 return false; 
             }
             finally
             {
-                con.Close(); // Assegure-se de fechar a conexão
+                con.Close(); 
             }
         }
     }
