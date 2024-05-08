@@ -45,7 +45,8 @@ namespace TickUp.Controllers
             if (loginBemSucedido)
             {
                 HttpContext.Session.SetString("user", JsonConvert.SerializeObject(usuario));
-                Response.Cookies.Append("lista", JsonConvert.SerializeObject(usuario), new CookieOptions()
+                Response.Cookies.Append("lista", JsonConvert.SerializeObject(usuario), 
+                new CookieOptions()
                 {
                     Expires = DateTime.Now.AddHours(1)
                 });
@@ -75,7 +76,7 @@ namespace TickUp.Controllers
                     {
                         string cabecalhoCookies = Request.Headers["Cookie"];
                         string valorCookie = ExtrairCookie(cabecalhoCookies, "lista");
-                        //l = JsonConvert.DeserializeObject<List<Usuario>>(valorCookie);
+                        l = JsonConvert.DeserializeObject<List<Usuario>>(valorCookie);
                         //adicionar esse cookie pro C# entender que ele existe
                         Response.Cookies.Append("lista", valorCookie);
                     }catch (Exception ex)
