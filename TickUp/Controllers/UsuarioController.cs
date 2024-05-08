@@ -45,6 +45,10 @@ namespace TickUp.Controllers
             if (loginBemSucedido)
             {
                 HttpContext.Session.SetString("user", JsonConvert.SerializeObject(usuario));
+                Response.Cookies.Append("lista", JsonConvert.SerializeObject(usuario), new CookieOptions()
+                {
+                    Expires = DateTime.Now.AddHours(1)
+                });
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -62,11 +66,47 @@ namespace TickUp.Controllers
                 Usuario sairUsuario = JsonConvert.DeserializeObject<Usuario>(userSession);
 
                 HttpContext.Session.Remove("user");
+
+                //deslogando os cookies
+                List<Usuario> l;
+                if (Request.Cookies["lista"] == null && Request.Headers.ContainsKey("Cookie"))
+                {
+                    try
+                    {
+                        string cabecalhoCookies = Request.Headers["Cookie"];
+                        string valorCookie = ExtrairCookie(cabecalhoCookies, "lista");
+                        //l = JsonConvert.DeserializeObject<List<Usuario>>(valorCookie);
+                        //adicionar esse cookie pro C# entender que ele existe
+                        Response.Cookies.Append("lista", valorCookie);
+                    }catch (Exception ex)
+                    {
+                         Console.WriteLine("Erro: " + ex.InnerException);
+                    }
+                        
+                }
             }
 
             return RedirectToAction("Index", "Home");
         }
 
-      }
+        private string ExtrairCookie(string cabecalhoCookies, string nomeCookie)
+        {
+            string[] cookies = cabecalhoCookies.Split(';');
+            foreach (string cookie in cookies)
+            {
+                string[] partes = cookie.Trim().Split('=');
+                if (partes.Length == 2 && partes[0] == nomeCookie)
+                {
+                    return partes[1];
+                }
+                else
+                {
+                    Console.WriteLine("erro");
+                }
+            }
+            return null;
+        }
+
+    }
 
 }

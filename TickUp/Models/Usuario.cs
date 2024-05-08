@@ -28,18 +28,18 @@ namespace TickUp.Models
 
         public string InserirUsuario()
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
             try
             {
                 con.Open();
-                MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO usuarios (email, cpf, nome, telefone, senha, idade) VALUES (@Email, @Cpf, @Nome, @Telefone, @Senha, @Idade)", con);
-                qry.Parameters.AddWithValue("@Email", emailUser);
-                qry.Parameters.AddWithValue("@Cpf", cpfUser);
-                qry.Parameters.AddWithValue("@Nome", nomeUser);
-                qry.Parameters.AddWithValue("@Telefone", telefoneUser);
-                qry.Parameters.AddWithValue("@Senha", senhaUser);
-                qry.Parameters.AddWithValue("@Idade", idadeUser);
+                MySqlCommand qry = new MySqlCommand( //MUDEI A ORDEM AQUI HEIM
+                    "INSERT INTO usuarios (email, cpf, idade, nome, telefone, senha) VALUES (@email, @cpf, @idade, @nome, @telefone, @senha)", con);
+                qry.Parameters.AddWithValue("@email", emailUser);
+                qry.Parameters.AddWithValue("@cpf", cpfUser);
+                qry.Parameters.AddWithValue("@nome", nomeUser);
+                qry.Parameters.AddWithValue("@telefone", telefoneUser);
+                qry.Parameters.AddWithValue("@senha", senhaUser);
+                qry.Parameters.AddWithValue("@idade", idadeUser);
 
                 qry.ExecuteNonQuery();
 
@@ -57,7 +57,7 @@ namespace TickUp.Models
 
         public static bool Login( Usuario usuario)
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
             try
             {
                 con.Open();
