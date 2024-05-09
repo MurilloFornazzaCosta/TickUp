@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model IEnumerable<TickUp.Models.Evento>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -63,14 +65,21 @@
                 <!--fim radio buttons-->
                 <!--slide images-->
 
-                <div class="card first">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
+
+                @foreach(var item in Model)
+                {
+                    <div class="card first">
+                        <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
+                        <div class="data"> Data do evento </div>
+                        <div class="heading">
+                            @Html.DisplayFor(modelItem => item.NomeEvento)
+                            <div class="author">  <span class="name">Local do evento</span> </div>
+                        </div>
                     </div>
-                </div>
+                }
+
+
+                
 
                 <div class="card">
                     <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>

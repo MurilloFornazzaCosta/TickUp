@@ -27,5 +27,6 @@ namespace TickUp.Controllers
 
             return RedirectToAction("CriarEvento");
         }
+
     }
 }

@@ -39,7 +39,7 @@ namespace TickUp.Models
         public string Inserir()
         {
 
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
             try
             {
                 
@@ -70,6 +70,49 @@ namespace TickUp.Models
 
 
 
+
+        }
+
+        public static List<Evento> ListarImgEventos()
+        {
+            List<Evento> eventos = new List<Evento>();
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            try
+            {
+                con.Open();                
+                MySqlCommand qry = new MySqlCommand(
+                    "SELECT * FROM eventos");
+                MySqlDataReader reader = qry.ExecuteReader();
+                while (reader.Read())
+                {
+                    string assunto = reader["assuntoEvento"].ToString();
+                    string categoria = reader["categoriaEvento"].ToString();
+                    string nome = reader["nomeEvento"].ToString();
+                    string id = reader["idEvento"].ToString();
+                    string emailContato = reader["emailContato"].ToString();
+                    string observacoes = reader["observacoes"].ToString();
+                    string dataInicio = reader["dataInicio"].ToString();
+                    string dataTermino = reader["dataTermino"].ToString();
+                    string horarioInicio = reader["horarioInicio"].ToString();
+                    string horarioTermino = reader["horarioTermino"].ToString();
+                    int capacidade = (int)reader["capacidade"];
+                    byte[] byteImagem = (byte[])reader["imagem"];
+                    string imagem = Convert.ToBase64String(byteImagem);
+                    Evento evento = new Evento(assunto, categoria, nome, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino, capacidade, byteImagem);
+
+                    eventos.Add(evento);
+                    con.Open();
+                }
+
+            }
+            catch(Exception ex)
+            {
+
+                return eventos;
+
+            }
+
+            return eventos;
 
         }
 
