@@ -81,8 +81,9 @@ namespace TickUp.Models
             {
                 con.Open();                
                 MySqlCommand qry = new MySqlCommand(
-                    "SELECT * FROM eventos");
+                    "SELECT * FROM eventos", con);
                 MySqlDataReader reader = qry.ExecuteReader();
+                reader.Read();
                 while (reader.Read())
                 {
                     string assunto = reader["assuntoEvento"].ToString();
@@ -101,8 +102,9 @@ namespace TickUp.Models
                     Evento evento = new Evento(assunto, categoria, nome, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino, capacidade, byteImagem);
 
                     eventos.Add(evento);
-                    con.Open();
+                    
                 }
+                con.Close();
 
             }
             catch(Exception ex)
