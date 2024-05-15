@@ -69,9 +69,12 @@
 
                 @foreach(var item in Model)
                 {
+                    string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
                     <div class="card first">
-                        <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                        <div class="data"> Data do evento </div>
+                        <div class="card-image"> <img class="img_evento_min" src=@formato alt=""> </div>
+                        <div class="data">
+                            @Html.DisplayFor(modelItem => item.DataInicio.ToString("dd-MM-yyyy"))
+                        </div>
                         <div class="heading">
                             @Html.DisplayFor(modelItem => item.NomeEvento)
                             <div class="author">  <span class="name">Local do evento</span> </div>

@@ -5,7 +5,8 @@ namespace TickUp.Models
     public class Evento
     {
 
-        private string assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino;
+        private string assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, horarioInicio, horarioTermino;
+        private DateTime dataInicio, dataTermino;
         private int capacidade;
         private byte[] bytesImagem;
 
@@ -14,14 +15,14 @@ namespace TickUp.Models
         public string NomeEvento { get => nomeEvento; set => nomeEvento = value; }
         public string EmailContato { get => emailContato; set => emailContato = value; }
         public string Observacoes { get => observacoes; set => observacoes = value; }
-        public string DataInicio { get => dataInicio; set => dataInicio = value; }
-        public string DataTermino { get => dataTermino; set => dataTermino = value; }
+        public DateTime DataInicio { get => dataInicio; set => dataInicio = value; }
+        public DateTime DataTermino { get => dataTermino; set => dataTermino = value; }
         public string HorarioInicio { get => horarioInicio; set => horarioInicio = value; }
         public string HorarioTermino { get => horarioTermino; set => horarioTermino = value; }
         public int Capacidade { get => capacidade; set => capacidade = value; }
         public byte[] BytesImagem { get => bytesImagem; set => bytesImagem = value; }
 
-        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string dataInicio, string dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
+        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, DateTime dataInicio, DateTime dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
         {
             this.assuntoEvento = assuntoEvento;
             this.categoriaEvento = categoriaEvento;
@@ -92,8 +93,8 @@ namespace TickUp.Models
                     string id = reader["idEvento"].ToString();
                     string emailContato = reader["emailContato"].ToString();
                     string observacoes = reader["observacoes"].ToString();
-                    string dataInicio = reader["dataInicio"].ToString();
-                    string dataTermino = reader["dataTermino"].ToString();
+                    DateTime dataInicio = (DateTime)reader["dataInicio"];
+                    DateTime dataTermino = (DateTime)reader["dataTermino"];
                     string horarioInicio = reader["horarioInicio"].ToString();
                     string horarioTermino = reader["horarioTermino"].ToString();
                     int capacidade = (int)reader["capacidade"];
