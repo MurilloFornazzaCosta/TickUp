@@ -6,7 +6,7 @@ namespace TickUp.Models
     {
 
         private string assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, horarioInicio, horarioTermino;
-        private DateTime dataInicio, dataTermino;
+        private DateOnly dataInicio, dataTermino;
         private int capacidade;
         private byte[] bytesImagem;
 
@@ -15,14 +15,14 @@ namespace TickUp.Models
         public string NomeEvento { get => nomeEvento; set => nomeEvento = value; }
         public string EmailContato { get => emailContato; set => emailContato = value; }
         public string Observacoes { get => observacoes; set => observacoes = value; }
-        public DateTime DataInicio { get => dataInicio; set => dataInicio = value; }
-        public DateTime DataTermino { get => dataTermino; set => dataTermino = value; }
+        public DateOnly DataInicio { get => dataInicio; set => dataInicio = value; }
+        public DateOnly DataTermino { get => dataTermino; set => dataTermino = value; }
         public string HorarioInicio { get => horarioInicio; set => horarioInicio = value; }
         public string HorarioTermino { get => horarioTermino; set => horarioTermino = value; }
         public int Capacidade { get => capacidade; set => capacidade = value; }
         public byte[] BytesImagem { get => bytesImagem; set => bytesImagem = value; }
 
-        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, DateTime dataInicio, DateTime dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
+        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, DateOnly dataInicio, DateOnly dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
         {
             this.assuntoEvento = assuntoEvento;
             this.categoriaEvento = categoriaEvento;
@@ -46,7 +46,7 @@ namespace TickUp.Models
                 
                 con.Open();
                 MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO eventos (assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino, capacidade, imagem) VALUES(@assuntoEvento, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @dataInicio, @dataTermino, @horarioInicio, @horarioTermino, @capacidade, @imagem)", con);
+                    "INSERT INTO eventos (assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, horarioInicio, horarioTermino, capacidade, imagem, dataInicio, dataTermino) VALUES(@assuntoEvento, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @horarioInicio, @horarioTermino, @capacidade, @imagem, @dataInicio, @dataTermino)", con);
                 qry.Parameters.AddWithValue("@assuntoEvento", assuntoEvento);
                 qry.Parameters.AddWithValue("@categoriaEvento", categoriaEvento);
                 qry.Parameters.AddWithValue("@nomeEvento", nomeEvento);
@@ -87,14 +87,15 @@ namespace TickUp.Models
                 reader.Read();
                 while (reader.Read())
                 {
+                   
                     string assunto = reader["assuntoEvento"].ToString();
                     string categoria = reader["categoriaEvento"].ToString();
                     string nome = reader["nomeEvento"].ToString();
                     string id = reader["idEvento"].ToString();
                     string emailContato = reader["emailContato"].ToString();
                     string observacoes = reader["observacoes"].ToString();
-                    DateTime dataInicio = (DateTime)reader["dataInicio"];
-                    DateTime dataTermino = (DateTime)reader["dataTermino"];
+                    DateOnly dataInicio = (DateOnly)reader["dataInicio"];
+                    DateOnly dataTermino = (DateOnly)reader["dataTermino"];
                     string horarioInicio = reader["horarioInicio"].ToString();
                     string horarioTermino = reader["horarioTermino"].ToString();
                     int capacidade = (int)reader["capacidade"];
