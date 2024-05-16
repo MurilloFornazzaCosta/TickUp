@@ -52,8 +52,8 @@ namespace TickUp.Models
                 qry.Parameters.AddWithValue("@nomeEvento", nomeEvento);
                 qry.Parameters.AddWithValue("@emailContato", emailContato);
                 qry.Parameters.AddWithValue("@observacoes", observacoes);
-                qry.Parameters.AddWithValue("@dataInicio", dataInicio);
-                qry.Parameters.AddWithValue("@dataTermino", dataTermino);
+                qry.Parameters.AddWithValue("@dataInicio", dataInicio.ToString("yyyy-MM-dd"));
+                qry.Parameters.AddWithValue("@dataTermino", dataTermino.ToString("yyyy-MM-dd"));
                 qry.Parameters.AddWithValue("@horarioInicio", horarioInicio);
                 qry.Parameters.AddWithValue("@horarioTermino", horarioTermino);
                 qry.Parameters.AddWithValue("@capacidade", capacidade);
@@ -94,8 +94,8 @@ namespace TickUp.Models
                     string id = reader["idEvento"].ToString();
                     string emailContato = reader["emailContato"].ToString();
                     string observacoes = reader["observacoes"].ToString();
-                    DateOnly dataInicio = (DateOnly)reader["dataInicio"];
-                    DateOnly dataTermino = (DateOnly)reader["dataTermino"];
+                    DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                    DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString()) ;
                     string horarioInicio = reader["horarioInicio"].ToString();
                     string horarioTermino = reader["horarioTermino"].ToString();
                     int capacidade = (int)reader["capacidade"];

@@ -14,6 +14,9 @@ namespace TickUp.Controllers
 
         public IActionResult CriarEvento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, DateOnly dataInicio, DateOnly dataTermino, string horarioInicio, string horarioTermino, int capacidade)
         {
+
+
+
             foreach (IFormFile arq in Request.Form.Files){
                 
                     MemoryStream stream = new MemoryStream();
