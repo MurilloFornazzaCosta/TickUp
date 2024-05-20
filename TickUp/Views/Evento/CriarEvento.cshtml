@@ -217,15 +217,15 @@
                 <div class="row g-3">
 
                     <div class="col-12">
-                        <label for="cep" class="form-label">Título do ingresso</label>
-                        <input type="text" class="form-control" id="ingresso" required="">
+                        <label for="quantidadeLimite" class="form-label">Limite de ingressos que uma pessoa pode comprar</label>
+                        <input asp-for="QuantidadeLimite" name="quantidadeLimite" type="number" class="form-control" id="quantidadeLimite" required="">
                         <div class="invalid-feedback">
-                            Insira o título do ingresso
+                            Insira a quantidade limite que uma pessoa pode comprar
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="complemento" class="form-label">Quantidade</label>
+                        <label for="capacidade" class="form-label">Quantidade</label>
                         <input asp-for="Capacidade" name="capacidade" type="number" class="form-control" id="quantidade" required="">
                         <div class="invalid-feedback">
                             Insira a quantidade
@@ -233,8 +233,9 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="cep" class="form-label">Preço</label>
+                        <label for="preco" class="form-label">Preço</label>
                         <input type="number" class="form-control" id="preco" required="">
+                        <input asp-for="Valor" name="valor" type="number" class="form-control" id="valor" required="">
                         <div class="invalid-feedback">
                             Insira o preço
                         </div>

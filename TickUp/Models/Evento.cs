@@ -1,4 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
+using FireSharp.Config;
+using FireSharp.Interfaces;
+using FireSharp.Response;
 
 namespace TickUp.Models
 {
@@ -8,6 +11,10 @@ namespace TickUp.Models
         private string assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino;
         private int capacidade;
         private byte[] bytesImagem;
+
+        //Varievis de ingresso
+        private int quantidadeLimite;
+        private double valor;
 
         public string AssuntoEvento { get => assuntoEvento; set => assuntoEvento = value; }
         public string CategoriaEvento { get => categoriaEvento; set => categoriaEvento = value; }
@@ -21,7 +28,11 @@ namespace TickUp.Models
         public int Capacidade { get => capacidade; set => capacidade = value; }
         public byte[] BytesImagem { get => bytesImagem; set => bytesImagem = value; }
 
-        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string dataInicio, string dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
+        public int QuantidadeLimite { get => quantidadeLimite; set => quantidadeLimite = value; }
+        public double Valor { get => valor; set => valor = value; }
+
+
+        public Evento(int quantidadeLimite, double valor, string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string dataInicio, string dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
         {
             this.assuntoEvento = assuntoEvento;
             this.categoriaEvento = categoriaEvento;
@@ -34,12 +45,17 @@ namespace TickUp.Models
             this.horarioTermino = horarioTermino;
             this.capacidade = capacidade;
             this.bytesImagem = bytesImagem;
+            
+            this.quantidadeLimite = quantidadeLimite;
+            this.valor = valor;
         }
+
+
 
         public string Inserir()
         {
 
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 
@@ -67,10 +83,22 @@ namespace TickUp.Models
             }
 
             return "Inserido com sucesso!";
+        }
 
 
-
-
+        IFirebaseConfig config = new FirebaseConfig
+        {
+            AuthSecret = "8bk6pzt4StGLmyg1h2ckiaODULn273DLyUeDeB7I",
+            BasePath = "https://tickup-251a6-default-rtdb.firebaseio.com"
+        };
+        IFirebaseClient client;
+        public string Firebase()
+        {
+            client = new FireSharp.FirebaseClient(config);
+            if (client != null)
+            {
+                Console.WriteLine($"Conectado com sucesso");
+            }
         }
 
     }
