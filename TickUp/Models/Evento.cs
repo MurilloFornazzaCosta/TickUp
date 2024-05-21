@@ -10,6 +10,8 @@ namespace TickUp.Models
         private int capacidade;
         private byte[] bytesImagem;
 
+        private string nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade, endereco;
+
         public string AssuntoEvento { get => assuntoEvento; set => assuntoEvento = value; }
         public string CategoriaEvento { get => categoriaEvento; set => categoriaEvento = value; }
         public string NomeEvento { get => nomeEvento; set => nomeEvento = value; }
@@ -21,6 +23,19 @@ namespace TickUp.Models
         public string HorarioTermino { get => horarioTermino; set => horarioTermino = value; }
         public int Capacidade { get => capacidade; set => capacidade = value; }
         public byte[] BytesImagem { get => bytesImagem; set => bytesImagem = value; }
+
+
+        public string NomeLocal { get => nomeLocal; set => nomeLocal = value; }
+        public string Cep { get => cep; set => cep = value; }
+        public string Rua { get => rua; set => rua = value; }
+        public string Numero { get => numero; set => numero = value; }
+        public string Complemento { get => complemento; set => complemento = value; }
+        public string Bairro { get => bairro; set => bairro = value; }
+        public string Estado { get => estado; set => estado = value; }
+        public string Cidade { get => cidade; set => cidade = value; }
+        public string Endereco { get => endereco; set => endereco = value; }
+        
+
 
         public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, DateOnly dataInicio, DateOnly dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
         {
@@ -37,16 +52,62 @@ namespace TickUp.Models
             this.bytesImagem = bytesImagem;
         }
 
+        // TALVEZ TIRAR COMPLEMENTO E NUMERO DO CONSTRUTOR
+        public Evento(string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, string endereco)
+        {
+            this.nomeLocal = nomeLocal;
+            this.cep = cep;
+            this.rua = rua;
+            this.numero = numero;
+            this.complemento = complemento;
+            this.bairro = bairro;
+            this.estado = estado;
+            this.cidade = cidade;
+            this.endereco = endereco;
+        }
+
+        public string InserirLocal()
+        {
+
+            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            try
+            {
+
+                con.Open();
+                MySqlCommand qry = new MySqlCommand(// MUDAR A ORDEM AQUI!!!
+                    "INSERT INTO locais (nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade, endereco) VALUES(@nomeLocal, @cep, @rua, @numero, @complemento, @bairro, @estado, @cidade, @endereco)", con);
+                qry.Parameters.AddWithValue("@nomeLocal", nomeLocal);
+                qry.Parameters.AddWithValue("@cep", cep);
+                qry.Parameters.AddWithValue("@rua", rua);
+                qry.Parameters.AddWithValue("@numero", numero);
+                qry.Parameters.AddWithValue("@complemento", complemento);
+                qry.Parameters.AddWithValue("@bairro", bairro);
+                qry.Parameters.AddWithValue("@estado", estado);
+                qry.Parameters.AddWithValue("@cidade", cidade);
+                qry.Parameters.AddWithValue("@endereco", endereco);
+                qry.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                return "Erro: " + ex.InnerException;
+            }
+
+            return "Inserido com sucesso!";
+
+        }
+
         public string Inserir()
         {
 
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
             try
             {
                 
                 con.Open();
-                MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO eventos (assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, horarioInicio, horarioTermino, capacidade, imagem, dataInicio, dataTermino) VALUES(@assuntoEvento, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @horarioInicio, @horarioTermino, @capacidade, @imagem, @dataInicio, @dataTermino)", con);
+                MySqlCommand qry = new MySqlCommand(// MUDAR A ORDEM AQUI!!!
+                    "INSERT INTO eventos (assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino, capacidade, imagem) VALUES(@assuntoEvento, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @dataInicio, @dataTermino, @horarioInicio, @horarioTermino, @capacidade, @imagem)", con);
                 qry.Parameters.AddWithValue("@assuntoEvento", assuntoEvento);
                 qry.Parameters.AddWithValue("@categoriaEvento", categoriaEvento);
                 qry.Parameters.AddWithValue("@nomeEvento", nomeEvento);
@@ -77,7 +138,7 @@ namespace TickUp.Models
         public static List<Evento> ListarImgEventos()
         {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
             try
             {
                 con.Open();                

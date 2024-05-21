@@ -24,16 +24,16 @@
                 <div class="row g-3">
 
                     <div class="col-12">
-                        <label for="endereco" class="form-label">Informe o endereço</label>
-                        <input type="address" class="form-control" id="endereco" placeholder="Endereço">
+                        <label for="nomeLocal" class="form-label">Endereço a ser exibido</label>
+                        <input asp-for="Endereco" name="endereco" type="text" class="form-control" id="nomeLocal" required="">
                         <div class="invalid-feedback">
-                            Please enter a valid address address for shipping updates.
+                            Please enter your shipping address.
                         </div>
                     </div>
 
                     <div class="col-12">
                         <label for="nomeLocal" class="form-label">Nome do Local</label>
-                        <input type="text" class="form-control" id="nomeLocal" required="">
+                        <input asp-for="NomeLocal" name="nomeLocal" type="text" class="form-control" id="nomeLocal" required="">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -41,7 +41,7 @@
 
                     <div class="col-12">
                         <label for="cep" class="form-label">CEP</label>
-                        <input type="number" class="form-control" id="cep" required="">
+                        <input asp-for="Cep" name="cep" type="text" class="form-control" id="cep" required="">
                         <div class="invalid-feedback">
                             Please enter your cep.
                         </div>
@@ -49,7 +49,7 @@
 
                     <div class="col-12">
                         <label for="numero" class="form-label">Av./Rua</label>
-                        <input type="text" class="form-control" id="numero" required="">
+                        <input asp-for="Rua" name="rua" type="text" class="form-control" id="numero" required="">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -57,7 +57,7 @@
 
                     <div class="col-12">
                         <label for="cep" class="form-label">Número</label>
-                        <input type="number" class="form-control" id="cep" required="">
+                        <input asp-for="Numero" name="numero" type="number" class="form-control" id="cep" required="">
                         <div class="invalid-feedback">
                             Please enter your cep.
                         </div>
@@ -65,7 +65,7 @@
 
                     <div class="col-12">
                         <label for="complemento" class="form-label">Complemento</label>
-                        <input type="text" class="form-control" id="complemento" required="">
+                        <input asp-for="Complemento" name="complemento" type="text" class="form-control" id="complemento" required="">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -73,7 +73,7 @@
 
                     <div class="col-12">
                         <label for="bairro" class="form-label">Bairro</label>
-                        <input type="text" class="form-control" id="bairro" required="">
+                        <input asp-for="Bairro" name="bairro" type="text" class="form-control" id="bairro" required="">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -81,7 +81,7 @@
 
                     <div class="col-md-6">
                         <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" required="">
+                        <select asp-for="Estado" name="estado" class="form-select" id="estado" required="">
                             <option value="">Escolha...</option>
                             <option>Acre</option>
                             <option>Alagoas</option>
@@ -118,7 +118,7 @@
 
                     <div class="col-md-6">
                         <label for="cidade" class="form-label">Cidade</label>
-                        <select class="form-select" id="cidade" required="">
+                        <select asp-for="Cidade" name="cidade" class="form-select" id="cidade" required="">
                             <option value="">Escolha...</option>
                             <option>Exemplo</option>
                         </select>
@@ -153,11 +153,11 @@
 
                     <select asp-for="AssuntoEvento" name="assuntoEvento" class="form-select" aria-label="Default select example">
                         <option selected>Assunto</option>
-                        <option value="1">Baile funk</option>
+                        <option value="Baile funk">Baile funk</option>
                     </select>
                     <select asp-for="CategoriaEvento" name="categoriaEvento" class="form-select" aria-label="Default select example">
                         <option selected>Categoria</option>
-                        <option value="1">Show</option>
+                        <option value="Show">Show</option>
                     </select>
 
                 </div>
