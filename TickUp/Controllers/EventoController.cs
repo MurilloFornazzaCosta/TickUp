@@ -12,8 +12,7 @@ namespace TickUp.Controllers
 
         [HttpPost]
 
-        public IActionResult CriarEvento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, DateOnly dataInicio, DateOnly dataTermino, string horarioInicio, string horarioTermino, int capacidade,
-           string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, string endereco)
+        public IActionResult CriarEvento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade)
         {
 
 
@@ -23,10 +22,30 @@ namespace TickUp.Controllers
                 MemoryStream stream = new MemoryStream();
                 arq.CopyTo(stream);
                 byte[] bytesImagem = stream.ToArray();
-                Evento evento = new Evento(assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino, capacidade, bytesImagem);
+                Evento evento = new Evento(
+                        assuntoEvento,
+                        categoriaEvento,
+                        nomeEvento,
+                        emailContato,
+                        observacoes,
+                        horarioInicio,
+                        horarioTermino,
+                        cpf,
+                        email,
+                        dataInicio,
+                        dataTermino,
+                        capacidade,
+                        bytesImagem,
+                        nomeLocal,
+                        cep,
+                        rua,
+                        numero,
+                        complemento,
+                        bairro,
+                        estado,
+                        cidade
+                    );
                 TempData["msg"] = evento.Inserir();
-                Evento localEvento = new Evento(nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade, endereco);
-                localEvento.InserirLocal();
 
             }
 

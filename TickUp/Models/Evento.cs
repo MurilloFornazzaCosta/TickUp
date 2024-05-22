@@ -5,12 +5,12 @@ namespace TickUp.Models
     public class Evento
     {
 
-        private string assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, horarioInicio, horarioTermino;
+        private string assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, horarioInicio, horarioTermino, cpf, email;
         private DateOnly dataInicio, dataTermino;
         private int capacidade;
         private byte[] bytesImagem;
 
-        private string nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade, endereco;
+        private string nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade;
 
         public string AssuntoEvento { get => assuntoEvento; set => assuntoEvento = value; }
         public string CategoriaEvento { get => categoriaEvento; set => categoriaEvento = value; }
@@ -23,6 +23,8 @@ namespace TickUp.Models
         public string HorarioTermino { get => horarioTermino; set => horarioTermino = value; }
         public int Capacidade { get => capacidade; set => capacidade = value; }
         public byte[] BytesImagem { get => bytesImagem; set => bytesImagem = value; }
+        public string Cpf { get => cpf; set => cpf = value; }
+        public string Email { get => email; set => email = value; }
 
 
         public string NomeLocal { get => nomeLocal; set => nomeLocal = value; }
@@ -33,28 +35,22 @@ namespace TickUp.Models
         public string Bairro { get => bairro; set => bairro = value; }
         public string Estado { get => estado; set => estado = value; }
         public string Cidade { get => cidade; set => cidade = value; }
-        public string Endereco { get => endereco; set => endereco = value; }
-        
 
-
-        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, DateOnly dataInicio, DateOnly dataTermino, string horarioInicio, string horarioTermino, int capacidade, byte[] bytesImagem)
+        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade)
         {
             this.assuntoEvento = assuntoEvento;
             this.categoriaEvento = categoriaEvento;
             this.nomeEvento = nomeEvento;
             this.emailContato = emailContato;
             this.observacoes = observacoes;
-            this.dataInicio = dataInicio;
-            this.dataTermino = dataTermino;
             this.horarioInicio = horarioInicio;
             this.horarioTermino = horarioTermino;
+            this.cpf = cpf;
+            this.email = email;
+            this.dataInicio = dataInicio;
+            this.dataTermino = dataTermino;
             this.capacidade = capacidade;
             this.bytesImagem = bytesImagem;
-        }
-
-        // TALVEZ TIRAR COMPLEMENTO E NUMERO DO CONSTRUTOR
-        public Evento(string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, string endereco)
-        {
             this.nomeLocal = nomeLocal;
             this.cep = cep;
             this.rua = rua;
@@ -63,39 +59,6 @@ namespace TickUp.Models
             this.bairro = bairro;
             this.estado = estado;
             this.cidade = cidade;
-            this.endereco = endereco;
-        }
-
-        public string InserirLocal()
-        {
-
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
-            try
-            {
-
-                con.Open();
-                MySqlCommand qry = new MySqlCommand(// MUDAR A ORDEM AQUI!!!
-                    "INSERT INTO locais (nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade, endereco) VALUES(@nomeLocal, @cep, @rua, @numero, @complemento, @bairro, @estado, @cidade, @endereco)", con);
-                qry.Parameters.AddWithValue("@nomeLocal", nomeLocal);
-                qry.Parameters.AddWithValue("@cep", cep);
-                qry.Parameters.AddWithValue("@rua", rua);
-                qry.Parameters.AddWithValue("@numero", numero);
-                qry.Parameters.AddWithValue("@complemento", complemento);
-                qry.Parameters.AddWithValue("@bairro", bairro);
-                qry.Parameters.AddWithValue("@estado", estado);
-                qry.Parameters.AddWithValue("@cidade", cidade);
-                qry.Parameters.AddWithValue("@endereco", endereco);
-                qry.ExecuteNonQuery();
-                con.Close();
-
-            }
-            catch (Exception ex)
-            {
-                return "Erro: " + ex.InnerException;
-            }
-
-            return "Inserido com sucesso!";
-
         }
 
         public string Inserir()
@@ -106,8 +69,8 @@ namespace TickUp.Models
             {
                 
                 con.Open();
-                MySqlCommand qry = new MySqlCommand(// MUDAR A ORDEM AQUI!!!
-                    "INSERT INTO eventos (assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino, capacidade, imagem) VALUES(@assuntoEvento, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @dataInicio, @dataTermino, @horarioInicio, @horarioTermino, @capacidade, @imagem)", con);
+                MySqlCommand qry = new MySqlCommand(
+                    "INSERT INTO Evento (dataInicio, horarioInicio, categoriaEvento, nomeEvento, emailContato, observacoes, assuntoEvento, imagem, horarioTermino, dataTermino, capacidade, cpf, email, numero, rua, bairro, nomeLocal, cidade, estado, cep, complemento) VALUES (@dataInicio, @horarioInicio, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @assuntoEvento, @imagem, @horarioTermino, @dataTermino, @capacidade, @cpf, @email, @numero, @rua, @bairro, @nomeLocal, @cidade, @estado, @cep, @complemento)", con);
                 qry.Parameters.AddWithValue("@assuntoEvento", assuntoEvento);
                 qry.Parameters.AddWithValue("@categoriaEvento", categoriaEvento);
                 qry.Parameters.AddWithValue("@nomeEvento", nomeEvento);
@@ -118,6 +81,16 @@ namespace TickUp.Models
                 qry.Parameters.AddWithValue("@horarioInicio", horarioInicio);
                 qry.Parameters.AddWithValue("@horarioTermino", horarioTermino);
                 qry.Parameters.AddWithValue("@capacidade", capacidade);
+                qry.Parameters.AddWithValue("@cpf", cpf); // Se não tiver o cpf, adicione como NULL no insert
+                qry.Parameters.AddWithValue("@email", email); // Se não tiver o email, adicione como NULL no insert
+                qry.Parameters.AddWithValue("@numero", numero);
+                qry.Parameters.AddWithValue("@rua", rua);
+                qry.Parameters.AddWithValue("@bairro", bairro);
+                qry.Parameters.AddWithValue("@nomeLocal", nomeLocal);
+                qry.Parameters.AddWithValue("@cidade", cidade);
+                qry.Parameters.AddWithValue("@estado", estado);
+                qry.Parameters.AddWithValue("@cep", cep);
+                qry.Parameters.AddWithValue("@complemento", complemento);
                 qry.Parameters.AddWithValue("@imagem", bytesImagem);
                 qry.ExecuteNonQuery();
                 con.Close();
@@ -131,8 +104,6 @@ namespace TickUp.Models
             return "Inserido com sucesso!";
 
 
-
-
         }
 
         public static List<Evento> ListarImgEventos()
@@ -143,26 +114,57 @@ namespace TickUp.Models
             {
                 con.Open();                
                 MySqlCommand qry = new MySqlCommand(
-                    "SELECT * FROM eventos", con);
+                    "SELECT * FROM Evento", con);
                 MySqlDataReader reader = qry.ExecuteReader();
                 reader.Read();
                 while (reader.Read())
                 {
-                   
+
                     string assunto = reader["assuntoEvento"].ToString();
                     string categoria = reader["categoriaEvento"].ToString();
                     string nome = reader["nomeEvento"].ToString();
-                    string id = reader["idEvento"].ToString();
                     string emailContato = reader["emailContato"].ToString();
                     string observacoes = reader["observacoes"].ToString();
-                    DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
-                    DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString()) ;
                     string horarioInicio = reader["horarioInicio"].ToString();
                     string horarioTermino = reader["horarioTermino"].ToString();
+                    string cpf = reader["cpf"].ToString();
+                    string email = reader["email"].ToString();
+                    DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                    DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString());
                     int capacidade = (int)reader["capacidade"];
                     byte[] byteImagem = (byte[])reader["imagem"];
-                    string imagem = Convert.ToBase64String(byteImagem);
-                    Evento evento = new Evento(assunto, categoria, nome, emailContato, observacoes, dataInicio, dataTermino, horarioInicio, horarioTermino, capacidade, byteImagem);
+                    string nomeLocal = reader["nomeLocal"].ToString();
+                    string cep = reader["cep"].ToString();
+                    string rua = reader["rua"].ToString();
+                    string numero = reader["numero"].ToString();
+                    string complemento = reader["complemento"].ToString();
+                    string bairro = reader["bairro"].ToString();
+                    string estado = reader["estado"].ToString();
+                    string cidade = reader["cidade"].ToString();
+
+                    Evento evento = new Evento(
+                        assunto,
+                        categoria,
+                        nome,
+                        emailContato,
+                        observacoes,
+                        horarioInicio,
+                        horarioTermino,
+                        cpf,
+                        email,
+                        dataInicio,
+                        dataTermino,
+                        capacidade,
+                        byteImagem,
+                        nomeLocal,
+                        cep,
+                        rua,
+                        numero,
+                        complemento,
+                        bairro,
+                        estado,
+                        cidade
+                    );
 
                     eventos.Add(evento);
                     

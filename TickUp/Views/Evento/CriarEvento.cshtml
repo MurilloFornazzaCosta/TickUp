@@ -23,13 +23,6 @@
                 <h4 class="mb-3">1. Onde o seu evento vai acontecer?</h4>
                 <div class="row g-3">
 
-                    <div class="col-12">
-                        <label for="nomeLocal" class="form-label">Endereço a ser exibido</label>
-                        <input asp-for="Endereco" name="endereco" type="text" class="form-control" id="nomeLocal" required="">
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
-                    </div>
 
                     <div class="col-12">
                         <label for="nomeLocal" class="form-label">Nome do Local</label>
@@ -247,6 +240,23 @@
                             Insira o email
                         </div>
                     </div>
+
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Email pessoal</label>
+                        <input asp-for="Email" name="email" type="text" class="form-control" id="preco" required="">
+                        <div class="invalid-feedback">
+                            Insira o email
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="cep" class="form-label">Cpf</label>
+                        <input asp-for="Cpf" name="cpf" type="text" class="form-control" id="preco" required="">
+                        <div class="invalid-feedback">
+                            Insira o email
+                        </div>
+                    </div>
+
                 </div>
 
                 <hr class="my-4">

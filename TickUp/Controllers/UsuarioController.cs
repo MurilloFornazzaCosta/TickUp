@@ -28,9 +28,9 @@ namespace TickUp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(string emailUser, string cpfUser, string nomeUser, string telefoneUser, string senhaUser, int idadeUser)
+        public IActionResult Cadastrar(string emailUser, string cpfUser, string nomeUser, string senhaUser, string telefoneUser, int idadeUser)
         {
-            Usuario user = new Usuario(emailUser, cpfUser, nomeUser, telefoneUser, senhaUser, idadeUser);
+            Usuario user = new Usuario(emailUser, cpfUser, nomeUser, senhaUser, telefoneUser, idadeUser);
             TempData["msg"] = user.InserirUsuario();
             return RedirectToAction("Cadastrar");
         }
