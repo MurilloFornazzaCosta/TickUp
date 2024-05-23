@@ -38,7 +38,7 @@ namespace TickUp.Controllers
         [HttpPost]
         public IActionResult Login(string emailUser, string senhaUser)
         {
-            Usuario usuario = new Usuario(emailUser, "", "", "", senhaUser, 0);
+            Usuario usuario = new Usuario(emailUser, "", "", senhaUser, "", 0);
 
             bool loginBemSucedido = Usuario.Login(usuario);
 
