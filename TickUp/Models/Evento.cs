@@ -106,7 +106,7 @@ namespace TickUp.Models
         public string Inserir()
         {
 
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
             try
             {
                 
@@ -151,7 +151,7 @@ namespace TickUp.Models
         public static List<Evento> ListarImgEventos()
         {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
             try
             {
                 con.Open();                
