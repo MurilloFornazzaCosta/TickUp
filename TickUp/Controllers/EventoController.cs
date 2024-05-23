@@ -1,6 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TickUp.Models;
 
+using FireSharp;
+using FireSharp.Config;
+using FireSharp.Interfaces;
+using FireSharp.Response;
+using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography;
+using System.IO;
+
+
 namespace TickUp.Controllers
 {
     public class EventoController : Controller
@@ -51,6 +62,42 @@ namespace TickUp.Controllers
 
             return RedirectToAction("CriarEvento");
         }
+
+        IFirebaseConfig config = new FirebaseConfig
+        {
+            AuthSecret = "8bk6pzt4StGLmyg1h2ckiaODULn273DLyUeDeB7I",
+            BasePath = "https://tickup-251a6-default-rtdb.firebaseio.com/"
+        };
+        IFirebaseClient client;
+        public EventoController()
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CadastroIngressofirebase(Evento evento)
+        {
+            
+            string idIngresso = Guid.NewGuid().ToString();
+
+            SetResponse response = client.Set("Ingressos/" + idIngresso, evento);
+            if ( response.StatusCode == System.Net.HttpStatusCode.OK )
+            {
+
+                return RedirectToAction("Index", "Home");
+
+            }
+            return RedirectToAction("CriarEvento");
+        } 
+        
+
 
     }
 }

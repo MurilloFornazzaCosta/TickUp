@@ -1,4 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
+using System.IO;
+using FireSharp.Config;
+using FireSharp.Response;
+using FireSharp.Interfaces;
 
 namespace TickUp.Models
 {
@@ -11,6 +16,8 @@ namespace TickUp.Models
         private byte[] bytesImagem;
 
         private string nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade;
+
+        private double valorIngresso;
 
         public string AssuntoEvento { get => assuntoEvento; set => assuntoEvento = value; }
         public string CategoriaEvento { get => categoriaEvento; set => categoriaEvento = value; }
@@ -36,6 +43,9 @@ namespace TickUp.Models
         public string Estado { get => estado; set => estado = value; }
         public string Cidade { get => cidade; set => cidade = value; }
 
+        public double ValorIngresso { get => valorIngresso; set => valorIngresso = value; }
+
+
         public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade)
         {
             this.assuntoEvento = assuntoEvento;
@@ -59,6 +69,10 @@ namespace TickUp.Models
             this.bairro = bairro;
             this.estado = estado;
             this.cidade = cidade;
+        }
+
+        public Evento()
+        { 
         }
 
         public string Inserir()
@@ -182,6 +196,7 @@ namespace TickUp.Models
             return eventos;
 
         }
+
 
     }
 }

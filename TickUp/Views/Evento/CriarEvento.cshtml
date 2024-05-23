@@ -18,8 +18,7 @@
   
     <main>
         <div class="col-md-7 col-lg-8">
-
-            <form class="needs-validation" enctype="multipart/form-data" method="post" novalidate="">
+            <form asp-action="CadastroIngressofirebase" class="needs-validation" enctype="multipart/form-data" method="post" novalidate="">
                 <h4 class="mb-3">1. Onde o seu evento vai acontecer?</h4>
                 <div class="row g-3">
 
@@ -136,6 +135,7 @@
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Imagem de divulgação</label>
                         <input class="form-control" type="file" name="imagem" id="formFile">
+
                     </div>
                     <p class="text-secondary">
                         A dimensão recomendada é de <span class="text-danger">1600 x 838</span>
@@ -210,14 +210,6 @@
                 <div class="row g-3">
 
                     <div class="col-12">
-                        <label for="cep" class="form-label">Título do ingresso</label>
-                        <input type="text" class="form-control" id="ingresso" required="">
-                        <div class="invalid-feedback">
-                            Insira o título do ingresso
-                        </div>
-                    </div>
-
-                    <div class="col-12">
                         <label for="complemento" class="form-label">Quantidade</label>
                         <input asp-for="Capacidade" name="capacidade" type="number" class="form-control" id="quantidade" required="">
                         <div class="invalid-feedback">
@@ -226,8 +218,8 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="cep" class="form-label">Preço</label>
-                        <input type="number" class="form-control" id="preco" required="">
+                        <label for="valor" class="form-label">Preço</label>
+                        <input asp-for="ValorIngresso" name="valorIngresso" type="number" class="form-control" id="valorIngresso" required="">
                         <div class="invalid-feedback">
                             Insira o preço
                         </div>
@@ -235,25 +227,25 @@
 
                     <div class="col-12">
                         <label for="cep" class="form-label">Email para contato</label>
-                        <input asp-for="EmailContato" name="emailContato" type="text" class="form-control" id="preco" required="">
+                        <input asp-for="EmailContato" name="emailContato" type="text" class="form-control" id="emailContato" required="">
                         <div class="invalid-feedback">
                             Insira o email
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="cep" class="form-label">Email pessoal</label>
-                        <input asp-for="Email" name="email" type="text" class="form-control" id="preco" required="">
+                        <label for="emailPessoal" class="form-label">Email pessoal</label>
+                        <input asp-for="Email" name="email" type="text" class="form-control" id="emailPessoal" required="">
                         <div class="invalid-feedback">
-                            Insira o email
+                            Insira o email pessoal
                         </div>
                     </div>
 
                     <div class="col-12">
                         <label for="cep" class="form-label">Cpf</label>
-                        <input asp-for="Cpf" name="cpf" type="text" class="form-control" id="preco" required="">
+                        <input asp-for="Cpf" name="cpf" type="text" class="form-control" id="cpf" required="">
                         <div class="invalid-feedback">
-                            Insira o email
+                            Insira o CPF
                         </div>
                     </div>
 
