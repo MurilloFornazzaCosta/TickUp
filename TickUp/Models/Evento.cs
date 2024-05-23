@@ -4,6 +4,7 @@ using System.IO;
 using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
+using System.Diagnostics;
 
 namespace TickUp.Models
 {
@@ -71,8 +72,35 @@ namespace TickUp.Models
             this.cidade = cidade;
         }
 
-        public Evento()
-        { 
+        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, double valorIngresso)
+        {
+            this.assuntoEvento = assuntoEvento;
+            this.categoriaEvento = categoriaEvento;
+            this.nomeEvento = nomeEvento;
+            this.emailContato = emailContato;
+            this.observacoes = observacoes;
+            this.horarioInicio = horarioInicio;
+            this.horarioTermino = horarioTermino;
+            this.cpf = cpf;
+            this.email = email;
+            this.dataInicio = dataInicio;
+            this.dataTermino = dataTermino;
+            this.capacidade = capacidade;
+            this.bytesImagem = bytesImagem;
+            this.nomeLocal = nomeLocal;
+            this.cep = cep;
+            this.rua = rua;
+            this.numero = numero;
+            this.complemento = complemento;
+            this.bairro = bairro;
+            this.estado = estado;
+            this.cidade = cidade;
+            this.valorIngresso = valorIngresso;
+        }
+
+        public Evento(byte[] bytesImagem)
+        {
+            this.bytesImagem = bytesImagem;
         }
 
         public string Inserir()

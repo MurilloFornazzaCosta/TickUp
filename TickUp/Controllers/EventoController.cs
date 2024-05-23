@@ -23,7 +23,7 @@ namespace TickUp.Controllers
 
         [HttpPost]
 
-        public IActionResult CriarEvento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade)
+        public IActionResult CriarEvento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade,double valorIngresso)
         {
 
 
@@ -56,12 +56,40 @@ namespace TickUp.Controllers
                         estado,
                         cidade
                     );
-                TempData["msg"] = evento.Inserir();
+                Evento eventoIngresso = new Evento(assuntoEvento,
+                        categoriaEvento,
+                        nomeEvento,
+                        emailContato,
+                        observacoes,
+                        horarioInicio,
+                        horarioTermino,
+                        cpf,
+                        email,
+                        dataInicio,
+                        dataTermino,
+                        capacidade,
+                        bytesImagem,
+                        nomeLocal,
+                        cep,
+                        rua,
+                        numero,
+                        complemento,
+                        bairro,
+                        estado,
+                        cidade,
+                        valorIngresso);
 
+                TempData["msg"] = evento.Inserir();
+                string idIngresso = Guid.NewGuid().ToString();
+
+                SetResponse response = client.Set("Teste/" + idIngresso, eventoIngresso);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK);
+    
             }
 
             return RedirectToAction("CriarEvento");
         }
+
 
         IFirebaseConfig config = new FirebaseConfig
         {
@@ -81,21 +109,6 @@ namespace TickUp.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult CadastroIngressofirebase(Evento evento)
-        {
-            
-            string idIngresso = Guid.NewGuid().ToString();
-
-            SetResponse response = client.Set("Ingressos/" + idIngresso, evento);
-            if ( response.StatusCode == System.Net.HttpStatusCode.OK )
-            {
-
-                return RedirectToAction("Index", "Home");
-
-            }
-            return RedirectToAction("CriarEvento");
-        } 
         
 
 
