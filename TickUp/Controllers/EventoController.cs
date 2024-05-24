@@ -80,16 +80,30 @@ namespace TickUp.Controllers
                         valorIngresso);
 
                 TempData["msg"] = evento.Inserir();
-                string idIngresso = Guid.NewGuid().ToString();
 
-                SetResponse response = client.Set("Teste/" + idIngresso, eventoIngresso);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK);
-    
-            }
+                int idEvento = 1 ;
+
+
+                //while (true)
+                //{
+                    for (int i = 0; i != capacidade; i++)
+                    {
+                        string idIngresso = Guid.NewGuid().ToString();
+
+                        SetResponse response = client.Set(idEvento + idIngresso, eventoIngresso);
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+
+                        }
+                    }
+                    idEvento++;
+            
+                }
+
+           // }
 
             return RedirectToAction("CriarEvento");
         }
-
 
         IFirebaseConfig config = new FirebaseConfig
         {
@@ -106,11 +120,9 @@ namespace TickUp.Controllers
             }
             catch (Exception)
             {
+
             }
         }
-
-        
-
-
     }
+
 }
