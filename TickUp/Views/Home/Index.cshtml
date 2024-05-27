@@ -66,10 +66,14 @@
                 <!--fim radio buttons-->
                 <!--slide images-->
 
+                @{
+                    //var url = Url.Action("ActionName", "ControllerName", new { id = item.Id });
+                }
 
                 @foreach(var item in Model)
                 {
                     string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
+                    
                     <div class="card first">
                         <div class="card-image"> <img class="img_evento_min" src=@formato alt=""> </div>
                         <div class="data">
@@ -77,9 +81,12 @@
                         </div>
                         <div class="heading">
                             @Html.DisplayFor(modelItem => item.NomeEvento)
+                                @Html.ActionLink("Evento/MostrarEvento", "MostrarEvento", new { id = item.IdEvento })
+
                             <div class="author">  <span class="name"> @Html.DisplayFor(modelItem => item.NomeLocal) </span> </div>
                         </div>
                     </div>
+                    
                 }
 
 

@@ -10,6 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.IO;
+using Microsoft.Extensions.Primitives;
 
 
 namespace TickUp.Controllers
@@ -20,6 +21,14 @@ namespace TickUp.Controllers
         {
             return View();
         }
+
+        public IActionResult MostrarEvento()
+        {
+
+            return View();
+        }
+
+
 
         [HttpPost]
 
@@ -55,6 +64,7 @@ namespace TickUp.Controllers
                         bairro,
                         estado,
                         cidade
+                        
                     );
                 Evento eventoIngresso = new Evento(assuntoEvento,
                         categoriaEvento,

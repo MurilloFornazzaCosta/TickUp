@@ -1,0 +1,110 @@
+﻿body {
+    height: 2500px;
+}
+
+.img_fundo {
+    filter: blur(15px);
+}
+
+.img_frente {
+    display: flex;
+    width: 850px;
+    position: absolute;
+    z-index: 1;
+    margin-top: -650px;
+    margin-left: 210px;
+}
+
+.secao_evento {
+    margin: 0 auto;
+    margin-top: -200px;
+    width: 1200px;
+    height: 450px;
+}
+
+#titulo {
+    margin-left: 20px;
+}
+
+.img_evento {
+    margin: 0 auto;
+    width: 1280px;
+}
+
+
+
+h3 {
+    margin-bottom: 40px;
+    margin-left: -1px;
+}
+
+.main_info {
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 10px;
+    width: 1200px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.card {
+    width: 250px;
+    background: white;
+    padding: .4em;
+    border-radius: 6px;
+}
+
+.category {
+    text-transform: uppercase;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: rgb(63, 121, 230);
+    padding: 10px 7px 0;
+}
+
+.heading {
+    font-weight: 600;
+    color: rgb(88, 87, 87);
+    padding: 7px;
+}
+
+    .heading:hover {
+        cursor: pointer;
+    }
+
+.bt_comprar {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #725AC1;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #725AC1;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #725AC1;
+}
+
+    .bt_comprar:hover {
+        color: white;
+        box-shadow: inset 0 -100px 0 0 #725AC1;
+    }
+
+    .bt_comprar:active {
+        transform: scale(0.9);
+    }
+
+footer {
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+    left: 35%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+}

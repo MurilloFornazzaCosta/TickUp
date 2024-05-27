@@ -15,10 +15,16 @@ namespace TickUp.Controllers
 
         public IActionResult Index()
         {
-            return View(Evento.ListarImgEventos());
+            return View(Evento.ListarEventos());
         }
 
- 
+        public IActionResult MostrarEvento(string id)
+        {
+
+            return View(Evento.MostrarEvento(id));
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
