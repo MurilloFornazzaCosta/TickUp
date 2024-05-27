@@ -21,15 +21,18 @@
         }
 
         <div class="img_evento">
-            <img class="img_fundo" src=@formato alt="">
-            <img class="img_frente" src=@formato" alt="">
+            <div class="img_especifica-fundo">
+                <img class="img_fundo" src=@formato alt="">
+            </div>
+            <div class="img_especifica-frente">
+                <img class="img_frente" src=@formato alt="">
+            </div>
 
             <div class="main_info">
                 <h3>@Model.NomeEvento</h3>
                 <p>@Model.DataInicio • @Model.HorarioInicio &gt; @Model.DataTermino • @Model.HorarioTermino</p>
                 <span>Evento presencial em @Model.Rua, @Model.Numero, @Model.Bairro &nbsp;<a href="">@Model.NomeLocal</a></span>
             </div>
-
 
 
             <div class="secao_evento">

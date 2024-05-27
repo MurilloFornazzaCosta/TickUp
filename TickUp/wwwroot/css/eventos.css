@@ -2,17 +2,31 @@
     height: 2500px;
 }
 
+.img_especifica-fundo {
+    width: 800px;
+    height: 500px;
+    display: flex;
+}
+
+.img_especifica-frente {
+    
+    width: 1050px;
+    height: 700px;
+    display: flex;
+}
+
 .img_fundo {
     filter: blur(15px);
+    width: 100%;
 }
 
 .img_frente {
     display: flex;
-    width: 850px;
+    width: 100%;
     position: absolute;
     z-index: 1;
     margin-top: -650px;
-    margin-left: 210px;
+    
 }
 
 .secao_evento {

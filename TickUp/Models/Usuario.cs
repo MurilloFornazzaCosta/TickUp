@@ -28,11 +28,11 @@ namespace TickUp.Models
 
         public string InserirUsuario()
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
             try
             {
                 con.Open();
-                MySqlCommand qry = new MySqlCommand( //MUDEI A ORDEM AQUI HEIM
+                MySqlCommand qry = new MySqlCommand( 
                     "INSERT INTO Usuario (cpf, email, nome, senha, telefone, idade) VALUES (@cpf, @email, @nome, @senha, @telefone, @idade)", con);
                 qry.Parameters.AddWithValue("@email", emailUser);
                 qry.Parameters.AddWithValue("@cpf", cpfUser);
@@ -57,7 +57,7 @@ namespace TickUp.Models
 
         public static bool Login( Usuario usuario)
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
             try
             {
                 con.Open();
