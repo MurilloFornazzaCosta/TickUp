@@ -3,16 +3,19 @@
 }
 
 .img_especifica-fundo {
-    width: 800px;
-    height: 500px;
+    margin-left: -80px;
+    width: 1450px;
+    height: 700px;
     display: flex;
 }
 
 .img_especifica-frente {
-    
-    width: 1050px;
-    height: 700px;
+    margin: 0 auto;
+    width: 650px;
+    height: 400px;
     display: flex;
+    margin-top: -550px;
+    margin-bottom: 250px;
 }
 
 .img_fundo {
@@ -21,12 +24,8 @@
 }
 
 .img_frente {
-    display: flex;
     width: 100%;
-    position: absolute;
     z-index: 1;
-    margin-top: -650px;
-    
 }
 
 .secao_evento {

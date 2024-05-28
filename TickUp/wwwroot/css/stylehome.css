@@ -354,7 +354,8 @@ h3 {
 
 .card-image {
     background-color: rgb(255, 255, 255);
-    width: 100%;
+    display: flex;
+    width: 287px;
     height: 180px;
     border-radius: 6px 6px 0 0;
 }
