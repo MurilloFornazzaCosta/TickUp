@@ -91,26 +91,22 @@ namespace TickUp.Controllers
 
                 TempData["msg"] = evento.Inserir();
 
-                int idEvento = 1 ;
 
-
-                //while (true)
-                //{
+                string idEvento = evento.ObterUltimoIdEvento();
+               
                     for (int i = 0; i != capacidade; i++)
                     {
                         string idIngresso = Guid.NewGuid().ToString();
 
-                        SetResponse response = client.Set(idEvento + idIngresso, eventoIngresso);
+                        SetResponse response = client.Set(idEvento + "/" + idIngresso, eventoIngresso);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
 
                         }
                     }
-                    idEvento++;
             
                 }
 
-           // }
 
             return RedirectToAction("CriarEvento");
         }

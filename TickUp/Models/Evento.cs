@@ -135,7 +135,7 @@ namespace TickUp.Models
         public string Inserir()
         {
 
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 
@@ -179,7 +179,7 @@ namespace TickUp.Models
 
         public static Evento MostrarEvento(string idEvento)
         {
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();
@@ -268,7 +268,7 @@ namespace TickUp.Models
             public static List<Evento> ListarEventos()
             {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();                
@@ -343,6 +343,34 @@ namespace TickUp.Models
             return eventos;
 
         }
+        public string ObterUltimoIdEvento()
+        {
+            string ultimoId = "";
+
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            {
+                con.Open();
+
+                MySqlCommand qry = new MySqlCommand(
+                   "SELECT MAX(idEvento) FROM evento;", con);
+
+                using (MySqlDataReader reader = qry.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string idEvento = reader["MAX(idEvento)"].ToString();
+                        ultimoId = idEvento;
+                    }
+                }
+                con.Close();
+            }
+
+            return ultimoId;
+   
+
+        }
+
+
 
 
     }
