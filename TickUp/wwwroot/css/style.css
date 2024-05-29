@@ -1,13 +1,17 @@
 ﻿body {
-    height: 2000px;
+    height: 100%;
 }
 
 #titulo {
     margin-left: 20px;
 }
 
+main{
+    height: 80ph;
+}
+
 footer {
-    margin-top: auto;
+    margin-top: 0 auto;
     position: relative;
     bottom: 0;
     left: 35%;

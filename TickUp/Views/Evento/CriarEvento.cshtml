@@ -111,13 +111,11 @@
 
                     <div class="col-md-6">
                         <label for="cidade" class="form-label">Cidade</label>
-                        <select asp-for="Cidade" name="cidade" class="form-select" id="cidade" required="">
-                            <option value="">Escolha...</option>
-                            <option>Exemplo</option>
-                        </select>
+                        <input asp-for="Cidade" name="cidade" type="text" class="form-control" id="nomeEvento" required="">
                         <div class="invalid-feedback">
                             Please provide a valid state.
                         </div>
+
                     </div>
 
                 </div>

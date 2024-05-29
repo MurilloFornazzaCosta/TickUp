@@ -58,6 +58,18 @@
 
                 <div class="card">
                     <div class="category"> @Model.NomeEvento </div>
+                    <div class="valor">
+                        <p id="rs">R$</p>
+                        <div class="heading" id="preco"> 10.00 </div>
+                    </div>
+                    <div class="buttonComprar">
+                        <button class="bt_comprar">Comprar</button>
+                        <div class="contador">
+                            <button id="minus">-</button>
+                            <span id="value">0</span>
+                            <button id="plus">+</button>
+                        </div>
+                    </div>
                     <div class="heading"> preço </div>
                     <form asp-controller="Evento" asp-action="PegarIngresso" method="get">
                         <input type="hidden" name="idEvento" value="@Model.IdEvento"/>
@@ -73,6 +85,8 @@
 
 
     </main>
+
+    <script src="/js/eventosjs.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
 
