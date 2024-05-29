@@ -6,6 +6,7 @@ using FireSharp.Response;
 using FireSharp.Interfaces;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using System.Collections.Specialized;
 
 namespace TickUp.Models
 {
@@ -129,7 +130,11 @@ namespace TickUp.Models
 
         public Evento(byte[] bytesImagem)
         {
-            this.bytesImagem = bytesImagem;
+           
+        }
+        public Evento()
+        {
+
         }
 
         public string Inserir()
@@ -179,7 +184,7 @@ namespace TickUp.Models
 
         public static Evento MostrarEvento(string idEvento)
         {
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();
@@ -268,7 +273,7 @@ namespace TickUp.Models
             public static List<Evento> ListarEventos()
             {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();                
@@ -366,11 +371,8 @@ namespace TickUp.Models
             }
 
             return ultimoId;
-   
 
         }
-
-
 
 
     }

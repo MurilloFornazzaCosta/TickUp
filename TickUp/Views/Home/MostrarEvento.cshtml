@@ -59,7 +59,10 @@
                 <div class="card">
                     <div class="category"> @Model.NomeEvento </div>
                     <div class="heading"> preço </div>
-                    <button class="bt_comprar">Comprar</button>
+                    <form asp-controller="Evento" asp-action="PegarIngresso" method="get">
+                        <input type="hidden" name="idEvento" value="@Model.IdEvento"/>
+                        <button type="submit" class="bt_comprar">Comprar</button>
+                    </form>
                 </div>
 
             </div>
