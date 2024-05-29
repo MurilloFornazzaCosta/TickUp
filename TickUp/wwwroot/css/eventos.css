@@ -1,5 +1,5 @@
-﻿body {
-    height: 2500px;
+﻿main {
+    height: 160vh;
 }
 
 .img_especifica-fundo {
@@ -61,7 +61,7 @@ h3 {
 }
 
 .card {
-    width: 250px;
+    width: 280px;
     background: white;
     padding: .4em;
     border-radius: 6px;
@@ -112,12 +112,64 @@ h3 {
         transform: scale(0.9);
     }
 
-footer {
-    margin-top: auto;
-    position: relative;
-    bottom: 0;
-    left: 35%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
+.buttonComprar {
+    display: flex;
+    align-items: center;
 }
+
+.valor {
+    display: flex;
+}
+
+#rs {
+    margin-top: 7px;
+    margin-left: 8px;
+}
+
+
+
+#minus {
+    color: #725AC1;
+    box-shadow: inset 0 0 0 0 #725AC1;
+    transition: ease-out 0.5s;
+    background: transparent;
+    border: 2px solid #725AC1;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+}
+
+    #minus:hover {
+        color: white;
+        box-shadow: inset 0 -100px 0 0 #725AC1;
+    }
+
+    #minus:active {
+        transform: scale(0.8);
+    }
+
+#plus {
+    color: #725AC1;
+    box-shadow: inset 0 0 0 0 #725AC1;
+    transition: ease-out 0.5s;
+    background: transparent;
+    border: 2px solid #725AC1;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 5px;
+}
+
+    #plus:hover {
+        color: white;
+        box-shadow: inset 0 -100px 0 0 #725AC1;
+    }
+
+    #plus:active {
+        transform: scale(0.8);
+    }
