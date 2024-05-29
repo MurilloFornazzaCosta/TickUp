@@ -179,7 +179,7 @@ namespace TickUp.Models
 
         public static Evento MostrarEvento(string idEvento)
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
             try
             {
                 con.Open();
@@ -268,7 +268,7 @@ namespace TickUp.Models
             public static List<Evento> ListarEventos()
             {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
             try
             {
                 con.Open();                
