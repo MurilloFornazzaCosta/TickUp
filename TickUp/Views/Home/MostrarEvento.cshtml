@@ -63,18 +63,21 @@
                         <div class="heading" id="preco"> 10.00 </div>
                     </div>
                     <div class="buttonComprar">
-                        <button class="bt_comprar">Comprar</button>
+                       
+                         <form asp-controller="Ingresso" asp-action="PegarIngresso" method="get">
+                        <input type="hidden" name="idEvento" value="@Model.IdEvento"/>
+                            <button class="bt_comprar">Comprar</button>
+                        </form>
+
                         <div class="contador">
-                            <button id="minus">-</button>
-                            <span id="value">0</span>
+                            <button  id="minus">-</button>
+                            <span id="value"> 0</span>
                             <button id="plus">+</button>
                         </div>
+
                     </div>
                     <div class="heading"> preço </div>
-                    <form asp-controller="Evento" asp-action="PegarIngresso" method="get">
-                        <input type="hidden" name="idEvento" value="@Model.IdEvento"/>
-                        <button type="submit" class="bt_comprar">Comprar</button>
-                    </form>
+                   
                 </div>
 
             </div>

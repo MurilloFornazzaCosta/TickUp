@@ -28,7 +28,6 @@ namespace TickUp.Controllers
             return View();
         }
 
-        private List<string> idIngressos = new List<string>();
         [HttpPost]
 
         public IActionResult CriarEvento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade,double valorIngresso)
@@ -96,7 +95,6 @@ namespace TickUp.Controllers
                     for (int i = 0; i != capacidade; i++)
                     {
                         string idIngresso = Guid.NewGuid().ToString();
-                        idIngressos.Add(idIngresso);
 
                     SetResponse response = client.Set(idEvento + "/" + idIngresso, eventoIngresso);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -130,28 +128,7 @@ namespace TickUp.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult PegarIngresso(string idEvento)
-        {
-            Evento evento = new Evento();   
 
-            Evento.MostrarEvento(idEvento);
-
-            Dictionary<string, Evento> lista = new Dictionary<string, Evento>();
-            FirebaseResponse response = client.Get(idEvento); 
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK){
-                lista = JsonConvert.DeserializeObject<Dictionary<string, Evento>>(response.Body);
-
-                foreach (var ingresso in idIngressos)
-                {
-                  
-                }
-            }
-
-
-            return RedirectToAction("CriarEvento", "Evento");
-        }
     }
 
 }

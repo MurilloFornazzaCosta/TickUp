@@ -8,32 +8,26 @@ using Newtonsoft.Json;
 namespace TickUp.Models
 {
 
-    public class Ingresso
+    public class Ingresso : Evento
     {
 
-        IFirebaseConfig config = new FirebaseConfig
-        {
-            AuthSecret = "8bk6pzt4StGLmyg1h2ckiaODULn273DLyUeDeB7I",
-            BasePath = "https://tickup-251a6-default-rtdb.firebaseio.com/"
-        };
-        IFirebaseClient client;
-        public Ingresso()
-        {
-            try
-            {
-                client = new FireSharp.FirebaseClient(config);
+        private int quantidadeCompra;
+        private double valoringresso;
 
-            }
-            catch (Exception)
-            {
+        public int QuantidadeCompra { get => quantidadeCompra; set => quantidadeCompra = value; }
+        public double Valoringresso { get => valoringresso; set => valoringresso = value; }
 
-            }
+        public Ingresso(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, int quantidadeCompra, double valoringresso) : 
+            base(assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, horarioInicio, horarioTermino, cpf, email, dataInicio, dataTermino, capacidade, bytesImagem, nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade)
+        {
+
+            this.quantidadeCompra = quantidadeCompra;
+            this.valoringresso = valoringresso;
 
         }
-        Evento evento = new Evento();
 
-        
+
+
        
-
     }
 }
