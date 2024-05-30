@@ -1,4 +1,8 @@
-﻿
+﻿body {
+    height: 100%;
+}
+
+
 
 .mom-categorias {
     margin: auto;
@@ -62,6 +66,9 @@
     scale: 0.98;
 }
 
+a{
+    text-decoration:none;
+}
 
 
 h3 {
@@ -278,15 +285,15 @@ h3 {
 }
 
 #radio2-min:checked ~ .first {
-    margin-left: -8%;
+    margin-left: -7%;
 }
 
 #radio3-min:checked ~ .first {
-    margin-left: -16%;
+    margin-left: -40%;
 }
 
 #radio4-min:checked ~ .first {
-    margin-left: -24%;
+    margin-left: -60%;
 }
 
 .navigation-auto-min div {
@@ -330,6 +337,87 @@ h3 {
 
 
 
+
+
+
+.manual_navigation-min2 {
+    position: absolute;
+    width: 1200px;
+    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+}
+
+.manual-btn-min2 {
+    border: 2px solid #339989;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+    .manual-btn-min2:not(:last-child) {
+        margin-right: 10px;
+    }
+
+    .manual-btn-min2:hover {
+        background-color: #7DE2D1;
+    }
+
+#radio1-min2:checked ~ .first {
+    margin-left: 0;
+}
+
+#radio2-min2:checked ~ .first {
+    margin-left: -20%;
+}
+
+#radio3-min2:checked ~ .first {
+    margin-left: -40%;
+}
+
+#radio4-min2:checked ~ .first {
+    margin-left: -60%;
+}
+
+.navigation-auto-min2 div {
+    border: 2px solid #339989;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.navigation-auto-min2 {
+    position: absolute;
+    width: 1200px;
+    margin-top: 360px;
+    display: flex;
+    justify-content: center;
+}
+
+    .navigation-auto-min2 div:not(:last-child) {
+        margin-right: 10px;
+    }
+
+
+
+#radio1-min2:checked ~ .navigation-auto-min2 .auto-btn1-min2 {
+    background-color: #7DE2D1;
+}
+
+#radio2-min2:checked ~ .navigation-auto-min2 .auto-btn2-min2 {
+    background-color: #7DE2D1;
+}
+
+#radio3-min2:checked ~ .navigation-auto-min2 .auto-btn3-min2 {
+    background-color: #7DE2D1;
+}
+
+#radio4-min2:checked ~ .navigation-auto-min2 .auto-btn4-min2 {
+    background-color: #7DE2D1;
+}
 
 
 .card {
@@ -392,4 +480,7 @@ h3 {
     font-weight: 600;
 }
 
+main {
+    height: 200vh;
+}
 
