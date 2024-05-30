@@ -1,4 +1,5 @@
-﻿main {
+﻿
+main {
     height: 160vh;
 }
 
@@ -43,7 +44,6 @@
     margin: 0 auto;
     width: 1280px;
 }
-
 
 
 h3 {

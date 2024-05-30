@@ -31,7 +31,13 @@ minusButton.addEventListener('mousedown', () => {
     }, 100);
 })
 
+
 document.addEventListener('mouseup', () => clearInterval(intervalId));
+
+
+
+
+ 
 
 
 

@@ -11,6 +11,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.IO;
 using Microsoft.Extensions.Primitives;
+using HtmlAgilityPack;
 
 
 namespace TickUp.Controllers
@@ -61,31 +62,9 @@ namespace TickUp.Controllers
                         complemento,
                         bairro,
                         estado,
-                        cidade
-                        
-                    );
-                Evento eventoIngresso = new Evento(assuntoEvento,
-                        categoriaEvento,
-                        nomeEvento,
-                        emailContato,
-                        observacoes,
-                        horarioInicio,
-                        horarioTermino,
-                        cpf,
-                        email,
-                        dataInicio,
-                        dataTermino,
-                        capacidade,
-                        bytesImagem,
-                        nomeLocal,
-                        cep,
-                        rua,
-                        numero,
-                        complemento,
-                        bairro,
-                        estado,
                         cidade,
-                        valorIngresso);
+                        valorIngresso
+                        );
 
                 TempData["msg"] = evento.Inserir();
 
@@ -96,7 +75,7 @@ namespace TickUp.Controllers
                     {
                         string idIngresso = Guid.NewGuid().ToString();
 
-                    SetResponse response = client.Set(idEvento + "/" + idIngresso, eventoIngresso);
+                    SetResponse response = client.Set(idEvento + "/" + idIngresso, evento);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
 
@@ -127,6 +106,8 @@ namespace TickUp.Controllers
 
             }
         }
+      
+
 
 
     }

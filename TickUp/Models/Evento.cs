@@ -7,6 +7,8 @@ using FireSharp.Interfaces;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using System.Collections.Specialized;
+using HtmlAgilityPack;
+using Google.Protobuf.WellKnownTypes;
 
 namespace TickUp.Models
 {
@@ -20,7 +22,9 @@ namespace TickUp.Models
 
         private string nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade;
 
-        private double valorIngresso;
+        public double valorIngresso;
+        private int quantidadeIngresso;
+
 
         public string AssuntoEvento { get => assuntoEvento; set => assuntoEvento = value; }
         public string CategoriaEvento { get => categoriaEvento; set => categoriaEvento = value; }
@@ -48,7 +52,7 @@ namespace TickUp.Models
 
         public double ValorIngresso { get => valorIngresso; set => valorIngresso = value; }
         public string IdEvento { get => idEvento; set => idEvento = value; }
-
+        public int QuantidadeIngresso { get => quantidadeIngresso; set => quantidadeIngresso = value; }
 
         public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade)
         {
@@ -100,9 +104,38 @@ namespace TickUp.Models
             this.bairro = bairro;
             this.estado = estado;
             this.cidade = cidade;
+
         }
 
-        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, double valorIngresso)
+            public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string idEvento, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, double valorIngresso)
+        {
+            this.assuntoEvento = assuntoEvento;
+            this.categoriaEvento = categoriaEvento;
+            this.nomeEvento = nomeEvento;
+            this.emailContato = emailContato;
+            this.observacoes = observacoes;
+            this.idEvento = idEvento;
+            this.horarioInicio = horarioInicio;
+            this.horarioTermino = horarioTermino;
+            this.cpf = cpf;
+            this.email = email;
+            this.dataInicio = dataInicio;
+            this.dataTermino = dataTermino;
+            this.capacidade = capacidade;
+            this.bytesImagem = bytesImagem;
+            this.nomeLocal = nomeLocal;
+            this.cep = cep;
+            this.rua = rua;
+            this.numero = numero;
+            this.complemento = complemento;
+            this.bairro = bairro;
+            this.estado = estado;
+            this.cidade = cidade;
+            this.valorIngresso = valorIngresso;
+
+        }
+
+        public Evento(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes,  string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, double valorIngresso)
         {
             this.assuntoEvento = assuntoEvento;
             this.categoriaEvento = categoriaEvento;
@@ -126,12 +159,11 @@ namespace TickUp.Models
             this.estado = estado;
             this.cidade = cidade;
             this.valorIngresso = valorIngresso;
+
+
         }
 
-        public Evento(byte[] bytesImagem)
-        {
-           
-        }
+
         public Evento()
         {
 
@@ -146,7 +178,7 @@ namespace TickUp.Models
                 
                 con.Open();
                 MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO Evento (dataInicio, horarioInicio, categoriaEvento, nomeEvento, emailContato, observacoes, assuntoEvento, imagem, horarioTermino, dataTermino, capacidade, cpf, email, numero, rua, bairro, nomeLocal, cidade, estado, cep, complemento) VALUES (@dataInicio, @horarioInicio, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @assuntoEvento, @imagem, @horarioTermino, @dataTermino, @capacidade, @cpf, @email, @numero, @rua, @bairro, @nomeLocal, @cidade, @estado, @cep, @complemento)", con);
+                    "INSERT INTO Evento (dataInicio, horarioInicio, categoriaEvento, nomeEvento, emailContato, observacoes, assuntoEvento, imagem, horarioTermino, dataTermino, capacidade, cpf, email, numero, rua, bairro, nomeLocal, cidade, estado, cep, complemento, valorIngresso) VALUES (@dataInicio, @horarioInicio, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @assuntoEvento, @imagem, @horarioTermino, @dataTermino, @capacidade, @cpf, @email, @numero, @rua, @bairro, @nomeLocal, @cidade, @estado, @cep, @complemento, @valorIngresso)", con);
                 qry.Parameters.AddWithValue("@assuntoEvento", assuntoEvento);
                 qry.Parameters.AddWithValue("@categoriaEvento", categoriaEvento);
                 qry.Parameters.AddWithValue("@nomeEvento", nomeEvento);
@@ -168,6 +200,7 @@ namespace TickUp.Models
                 qry.Parameters.AddWithValue("@cep", cep);
                 qry.Parameters.AddWithValue("@complemento", complemento);
                 qry.Parameters.AddWithValue("@imagem", bytesImagem);
+                qry.Parameters.AddWithValue("@valorIngresso", valorIngresso);
                 qry.ExecuteNonQuery();
                 con.Close();
 
@@ -219,6 +252,7 @@ namespace TickUp.Models
                         string bairro = reader["bairro"].ToString();
                         string estado = reader["estado"].ToString();
                         string cidade = reader["cidade"].ToString();
+                        double valorIngresso = (double)reader["valorIngresso"];
 
                         Evento evento = new Evento(
                             assunto,
@@ -242,9 +276,8 @@ namespace TickUp.Models
                             complemento,
                             bairro,
                             estado,
-                            cidade
-
-
+                            cidade,
+                            valorIngresso
 
                         );
 

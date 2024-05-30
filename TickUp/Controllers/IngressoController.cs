@@ -10,7 +10,6 @@ namespace TickUp.Controllers
 {
     public class IngressoController : Controller
     {
-        private List<Ingresso> ingressos = new List<Ingresso>();
 
 
     public IActionResult Index()
@@ -37,7 +36,7 @@ namespace TickUp.Controllers
         }
 
         [HttpGet]
-        public IActionResult PegarIngresso(string idEvento)
+        public IActionResult PegarIngresso(string idEvento, int quantidadeIngresso)
         {
             FirebaseResponse response = client.Get(idEvento);
 
@@ -45,13 +44,24 @@ namespace TickUp.Controllers
             {
                 Dictionary<string, Ingresso> ingressosDic = JsonConvert.DeserializeObject<Dictionary<string, Ingresso>>(response.Body);
 
-                foreach (var ingresso in ingressosDic.Values)
+                int count = 0;
+
+                foreach (var ingresso in ingressosDic)
                 {
-                    ingressos.Add(ingresso);
+                    if (count >= quantidadeIngresso)
+                    {
+                        break;
+                    }
+
+                    string idIngresso = ingresso.Key;
+                    Ingresso ingressoModel = new Ingresso();
+                    ingressoModel.IngressoComprado(idEvento, idIngresso);
+                    count++;
                 }
             }
 
             return RedirectToAction("CriarEvento", "Evento");
         }
+
     }
 }

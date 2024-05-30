@@ -1,8 +1,9 @@
 ﻿@model TickUp.Models.Evento
 
 @{
-}
+    ViewData["Title"] = "PegarIngresso";
 
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,25 +60,25 @@
                 <div class="card">
                     <div class="category"> @Model.NomeEvento </div>
                     <div class="valor">
-                        <p id="rs">R$</p>
-                        <div class="heading" id="preco"> 10.00 </div>
+                        <p id="rs">R$ @Model.ValorIngresso</p>
+                        <div  class="heading" id="preco"></div>
                     </div>
-                    <div class="buttonComprar">
+                    <div  class="buttonComprar">
                        
                          <form asp-controller="Ingresso" asp-action="PegarIngresso" method="get">
                         <input type="hidden" name="idEvento" value="@Model.IdEvento"/>
+                            <input asp-for="QuantidadeIngresso" name="quantidadeIngresso" type="hidden" class="form-control" id="quantidadeIngresso" required="">
                             <button class="bt_comprar">Comprar</button>
                         </form>
 
+
                         <div class="contador">
-                            <button  id="minus">-</button>
-                            <span id="value"> 0</span>
+                            <button id="minus">-</button>
+                            <span id="value">0</span>
                             <button id="plus">+</button>
                         </div>
 
                     </div>
-                    <div class="heading"> preço </div>
-                   
                 </div>
 
             </div>
@@ -86,10 +87,11 @@
 
 
 
-
     </main>
 
-    <script src="/js/eventosjs.js"></script>
+    <script src="~/js/compraIngresso.js"></script>
+  @*   <script src="~/js/eventosjs.js"></script> *@
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
 
