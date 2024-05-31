@@ -1,7 +1,9 @@
 ﻿using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using TickUp.Models;
@@ -11,8 +13,8 @@ namespace TickUp.Controllers
     public class IngressoController : Controller
     {
 
-
-    public IActionResult Index()
+        [ServiceFilter(typeof(Autentificacao))]
+        public IActionResult PegarIngresso()
         {
             return View();
         }
@@ -55,13 +57,32 @@ namespace TickUp.Controllers
 
                     string idIngresso = ingresso.Key;
                     Ingresso ingressoModel = new Ingresso();
-                    ingressoModel.IngressoComprado(idEvento, idIngresso);
+                    ingressoModel.IngressoComprado(idEvento, idIngresso, HttpContext);
+                    client.Delete($"{idEvento}/{idIngresso}");
                     count++;
                 }
             }
 
             return RedirectToAction("CriarEvento", "Evento");
         }
+
+
+        public IActionResult IngressosComprados()
+        {
+            Ingresso ingresso = new Ingresso();
+
+            // Obtém o email do usuário de algum lugar (por exemplo, da sessão)
+
+            // Chama o método para listar os ingressos do usuário
+            List<Evento> eventos = ingresso.ListarIngressos(HttpContext);
+
+            // Passa a lista de eventos como modelo para a view
+            return View(eventos);
+        }
+
+
+
+
 
     }
 }

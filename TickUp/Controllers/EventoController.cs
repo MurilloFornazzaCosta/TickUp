@@ -18,6 +18,7 @@ namespace TickUp.Controllers
 {
     public class EventoController : Controller
     {
+        [ServiceFilter(typeof(Autentificacao))]
         public IActionResult CriarEvento()
         {
             return View();

@@ -28,7 +28,7 @@ namespace TickUp.Models
 
         public string InserirUsuario()
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();
@@ -57,7 +57,7 @@ namespace TickUp.Models
 
         public static bool Login( Usuario usuario)
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();
@@ -84,5 +84,6 @@ namespace TickUp.Models
                 con.Close(); 
             }
         }
+
     }
 }

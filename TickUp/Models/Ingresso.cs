@@ -1,10 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Http;
 
 namespace TickUp.Models
 {
     public class Ingresso : Evento
     {
-        // Outros membros da classe
 
         Evento evento = new Evento();
 
@@ -15,32 +17,42 @@ namespace TickUp.Models
         {
 
         }
-        public string IngressoComprado(string idEvento, string idIngresso)
+        
+
+        public string IngressoComprado(string idEvento, string idIngresso, HttpContext httpContext)
         {
             string mensagem = "Comprado com sucesso";
 
             try
             {
                 double valorIngresso;
-                string email, cpf;
+                string email;
 
-                // Criação da conexão com o banco de dados
+                // Recupera o objeto Usuario da sessão
+                string usuarioJson = httpContext.Session.GetString("user");
+
+                if (usuarioJson == null)
+                {
+                    throw new Exception("Usuário não está logado");
+                }
+
+                Usuario usuario = JsonConvert.DeserializeObject<Usuario>(usuarioJson);
+
+                email = usuario.EmailUser;
+               
+
                 using (MySqlConnection con = FabricaConexao.getConexao("casaGustavo"))
                 {
                     con.Open();
 
-                    // Consulta para obter o valor do ingresso do evento
-                    MySqlCommand qryDadosEvento = new MySqlCommand("SELECT ValorIngresso, Email, CPF FROM Evento WHERE idEvento = @idEvento", con);
+                    MySqlCommand qryDadosEvento = new MySqlCommand("SELECT ValorIngresso FROM Evento WHERE idEvento = @idEvento", con);
                     qryDadosEvento.Parameters.AddWithValue("@idEvento", idEvento);
 
-                    // Executa a consulta e obtém o valor do ingresso
                     using (MySqlDataReader reader = qryDadosEvento.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             valorIngresso = Convert.ToDouble(reader["ValorIngresso"]);
-                            email = reader["Email"].ToString();
-                            cpf = reader["CPF"].ToString();
                         }
                         else
                         {
@@ -48,15 +60,12 @@ namespace TickUp.Models
                         }
                     }
 
-                        // Prepara a query SQL para inserir o ingresso no banco de dados
-                        MySqlCommand qry = new MySqlCommand("INSERT INTO Ingresso (idIngresso, valor, idEvento, cpf, email) VALUES (@idIngresso, @valor, @idEvento, @cpf, @email)", con);
+                    MySqlCommand qry = new MySqlCommand("INSERT INTO Ingresso (idIngresso, valor, idEvento, email) VALUES (@idIngresso, @valor, @idEvento, @email)", con);
                     qry.Parameters.AddWithValue("@idIngresso", idIngresso);
                     qry.Parameters.AddWithValue("@valor", valorIngresso);
                     qry.Parameters.AddWithValue("@idEvento", idEvento);
-                    qry.Parameters.AddWithValue("@cpf", cpf);
                     qry.Parameters.AddWithValue("@email", email);
 
-                    // Executa a query
                     qry.ExecuteNonQuery();
                 }
             }
@@ -67,7 +76,105 @@ namespace TickUp.Models
 
             return mensagem;
         }
+        public List<Evento> ListarIngressos(HttpContext httpContext)
+        {
+            string email;
+            // Obtém o objeto Usuario da sessão
+            string usuarioJson = httpContext.Session.GetString("user");
+
+            if (usuarioJson == null)
+            {
+                throw new Exception("Objeto Usuario não encontrado na sessão.");
+            }
+
+            // Desserializa o objeto Usuario
+            Usuario usuario = JsonConvert.DeserializeObject<Usuario>(usuarioJson);
+
+            // Obtém o email do objeto Usuario
+            email = usuario.EmailUser;
+
+            var eventos = new List<Evento>();
+
+            using (MySqlConnection con = FabricaConexao.getConexao("casaGustavo"))
+            {
+                con.Open();
+
+                var query = @"SELECT  Evento.* FROM Ingresso JOIN Evento ON Ingresso.idEvento = Evento.idEvento WHERE Ingresso.email = @Email";
+
+                using (MySqlCommand command = new MySqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                           
+                            string assunto = reader["assuntoEvento"].ToString();
+                            string categoria = reader["categoriaEvento"].ToString();
+                            string nome = reader["nomeEvento"].ToString();
+                            string emailContato = reader["emailContato"].ToString();
+                            string observacoes = reader["observacoes"].ToString();
+                            string idevento = reader["idEvento"].ToString();
+                            string horarioInicio = reader["horarioInicio"].ToString();
+                            string horarioTermino = reader["horarioTermino"].ToString();
+                            string cpf = reader["cpf"].ToString();
+                            DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                            DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString());
+                            int capacidade = (int)reader["capacidade"];
+                            byte[] byteImagem = (byte[])reader["imagem"];
+                            string nomeLocal = reader["nomeLocal"].ToString();
+                            string cep = reader["cep"].ToString();
+                            string rua = reader["rua"].ToString();
+                            string numero = reader["numero"].ToString();
+                            string complemento = reader["complemento"].ToString();
+                            string bairro = reader["bairro"].ToString();
+                            string estado = reader["estado"].ToString();
+                            string cidade = reader["cidade"].ToString();
+
+                            Evento evento = new Evento(
+                                  assunto,
+                                  categoria,
+                                  nome,
+                                  emailContato,
+                                  observacoes,
+                                  idevento,
+                                  horarioInicio,
+                                  horarioTermino,
+                                  cpf,
+                                  email,
+                                  dataInicio,
+                                  dataTermino,
+                                  capacidade,
+                                  byteImagem,
+                                  nomeLocal,
+                                  cep,
+                                  rua,
+                                  numero,
+                                  complemento,
+                                  bairro,
+                                  estado,
+                                  cidade
+                              );
+
+
+                            eventos.Add(evento);
+                        }
+                    }
+                }
+            }
+
+            return eventos;
+        }
+
+
 
     }
+
+
+
+
+
 }
+
 

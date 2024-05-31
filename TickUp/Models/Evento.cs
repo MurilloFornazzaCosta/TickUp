@@ -172,7 +172,7 @@ namespace TickUp.Models
         public string Inserir()
         {
 
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 
@@ -217,7 +217,7 @@ namespace TickUp.Models
 
         public static Evento MostrarEvento(string idEvento)
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();
@@ -306,7 +306,7 @@ namespace TickUp.Models
             public static List<Evento> ListarEventos()
             {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
                 con.Open();                
@@ -385,7 +385,7 @@ namespace TickUp.Models
         {
             string ultimoId = "";
 
-            MySqlConnection con = FabricaConexao.getConexao("casaMurillo");
+            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             {
                 con.Open();
 
