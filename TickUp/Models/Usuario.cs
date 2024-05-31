@@ -28,12 +28,12 @@ namespace TickUp.Models
 
         public string InserirUsuario()
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             try
             {
                 con.Open();
-                MySqlCommand qry = new MySqlCommand( 
-                    "INSERT INTO Usuario (cpf, email, nome, senha, telefone, idade) VALUES (@cpf, @email, @nome, @senha, @telefone, @idade)", con);
+                MySqlCommand qry = new MySqlCommand(
+                    "INSERT INTO usuario (cpf, email, nome, senha, telefone, idade) VALUES (@cpf, @email, @nome, @senha, @telefone, @idade)", con);
                 qry.Parameters.AddWithValue("@email", emailUser);
                 qry.Parameters.AddWithValue("@cpf", cpfUser);
                 qry.Parameters.AddWithValue("@nome", nomeUser);
@@ -57,12 +57,12 @@ namespace TickUp.Models
 
         public static bool Login( Usuario usuario)
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             try
             {
                 con.Open();
 
-                string query = "SELECT COUNT(*) FROM Usuario WHERE email = @email AND senha = @senha";
+                string query = "SELECT COUNT(*) FROM usuario WHERE email = @email AND senha = @senha";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {

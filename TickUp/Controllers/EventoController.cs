@@ -67,7 +67,7 @@ namespace TickUp.Controllers
                         valorIngresso
                         );
 
-                TempData["msg"] = evento.Inserir();
+                TempData["msg"] = evento.Inserir(HttpContext);
 
 
                 string idEvento = evento.ObterUltimoIdEvento();

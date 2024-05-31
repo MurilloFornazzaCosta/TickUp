@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Specialized;
 using HtmlAgilityPack;
 using Google.Protobuf.WellKnownTypes;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace TickUp.Models
 {
@@ -169,60 +171,80 @@ namespace TickUp.Models
 
         }
 
-        public string Inserir()
+        public string Inserir(HttpContext httpContext)
         {
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
 
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
             try
             {
-                
                 con.Open();
-                MySqlCommand qry = new MySqlCommand(
-                    "INSERT INTO Evento (dataInicio, horarioInicio, categoriaEvento, nomeEvento, emailContato, observacoes, assuntoEvento, imagem, horarioTermino, dataTermino, capacidade, cpf, email, numero, rua, bairro, nomeLocal, cidade, estado, cep, complemento, valorIngresso) VALUES (@dataInicio, @horarioInicio, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @assuntoEvento, @imagem, @horarioTermino, @dataTermino, @capacidade, @cpf, @email, @numero, @rua, @bairro, @nomeLocal, @cidade, @estado, @cep, @complemento, @valorIngresso)", con);
-                qry.Parameters.AddWithValue("@assuntoEvento", assuntoEvento);
-                qry.Parameters.AddWithValue("@categoriaEvento", categoriaEvento);
-                qry.Parameters.AddWithValue("@nomeEvento", nomeEvento);
-                qry.Parameters.AddWithValue("@emailContato", emailContato);
-                qry.Parameters.AddWithValue("@observacoes", observacoes);
-                qry.Parameters.AddWithValue("@dataInicio", dataInicio.ToString("yyyy-MM-dd"));
-                qry.Parameters.AddWithValue("@dataTermino", dataTermino.ToString("yyyy-MM-dd"));
-                qry.Parameters.AddWithValue("@horarioInicio", horarioInicio);
-                qry.Parameters.AddWithValue("@horarioTermino", horarioTermino);
-                qry.Parameters.AddWithValue("@capacidade", capacidade);
-                qry.Parameters.AddWithValue("@cpf", cpf); 
-                qry.Parameters.AddWithValue("@email", email); 
-                qry.Parameters.AddWithValue("@numero", numero);
-                qry.Parameters.AddWithValue("@rua", rua);
-                qry.Parameters.AddWithValue("@bairro", bairro);
-                qry.Parameters.AddWithValue("@nomeLocal", nomeLocal);
-                qry.Parameters.AddWithValue("@cidade", cidade);
-                qry.Parameters.AddWithValue("@estado", estado);
-                qry.Parameters.AddWithValue("@cep", cep);
-                qry.Parameters.AddWithValue("@complemento", complemento);
-                qry.Parameters.AddWithValue("@imagem", bytesImagem);
-                qry.Parameters.AddWithValue("@valorIngresso", valorIngresso);
-                qry.ExecuteNonQuery();
-                con.Close();
 
-            }
-            catch(Exception ex)
+                string userSession = httpContext.Session.GetString("user");
+                if (string.IsNullOrEmpty(userSession))
+                {
+                    return "Erro: Sessão de usuário não encontrada.";
+                }
+
+                Usuario usuario = JsonConvert.DeserializeObject<Usuario>(userSession);
+                string email = usuario.EmailUser;
+
+                MySqlCommand selectQry = new MySqlCommand("SELECT cpf FROM usuario WHERE email = @Email", con);
+                selectQry.Parameters.AddWithValue("@Email", email);
+
+                string cpf = string.Empty;
+                using (MySqlDataReader reader = selectQry.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        cpf = reader["cpf"].ToString();
+                    }
+
+                }
+                    MySqlCommand qry = new MySqlCommand(
+                    "insert into evento (dataInicio, horarioInicio, categoriaEvento, nomeEvento, emailContato, observacoes, assuntoEvento, imagem, horarioTermino, dataTermino, capacidade, cpf, email, numero, rua, bairro, nomeLocal, cidade, estado, cep, complemento, valorIngresso) VALUES (@dataInicio, @horarioInicio, @categoriaEvento, @nomeEvento, @emailContato, @observacoes, @assuntoEvento, @imagem, @horarioTermino, @dataTermino, @capacidade, @cpf, @email, @numero, @rua, @bairro, @nomeLocal, @cidade, @estado, @cep, @complemento, @valorIngresso)", con);
+
+                    qry.Parameters.AddWithValue("@assuntoEvento", assuntoEvento);
+                    qry.Parameters.AddWithValue("@categoriaEvento", categoriaEvento);
+                    qry.Parameters.AddWithValue("@nomeEvento", nomeEvento);
+                    qry.Parameters.AddWithValue("@emailContato", emailContato);
+                    qry.Parameters.AddWithValue("@observacoes", observacoes);
+                    qry.Parameters.AddWithValue("@dataInicio", dataInicio.ToString("yyyy-MM-dd"));
+                    qry.Parameters.AddWithValue("@dataTermino", dataTermino.ToString("yyyy-MM-dd"));
+                    qry.Parameters.AddWithValue("@horarioInicio", horarioInicio);
+                    qry.Parameters.AddWithValue("@horarioTermino", horarioTermino);
+                    qry.Parameters.AddWithValue("@capacidade", capacidade);
+                    qry.Parameters.AddWithValue("@cpf", cpf);
+                    qry.Parameters.AddWithValue("@email", email); 
+                    qry.Parameters.AddWithValue("@numero", numero);
+                    qry.Parameters.AddWithValue("@rua", rua);
+                    qry.Parameters.AddWithValue("@bairro", bairro);
+                    qry.Parameters.AddWithValue("@nomeLocal", nomeLocal);
+                    qry.Parameters.AddWithValue("@cidade", cidade);
+                    qry.Parameters.AddWithValue("@estado", estado);
+                    qry.Parameters.AddWithValue("@cep", cep);
+                    qry.Parameters.AddWithValue("@complemento", complemento);
+                    qry.Parameters.AddWithValue("@imagem", bytesImagem);
+                    qry.Parameters.AddWithValue("@valorIngresso", valorIngresso);
+
+                    qry.ExecuteNonQuery();
+
+                    con.Close();
+                }
+            catch (Exception ex)
             {
-                return "Erro: " + ex.InnerException;
+                return "Erro: " + ex.Message; 
             }
 
             return "Inserido com sucesso!";
-
-
         }
-
         public static Evento MostrarEvento(string idEvento)
         {
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             try
             {
                 con.Open();
                 MySqlCommand qry = new MySqlCommand(
-                    "SELECT * FROM evento WHERE idEvento = @idEvento ;", con);
+                    "select * from evento WHERE idEvento = @idEvento ;", con);
                 qry.Parameters.AddWithValue("@idEvento", idEvento);
 
                 using (MySqlDataReader reader = qry.ExecuteReader())
@@ -306,12 +328,12 @@ namespace TickUp.Models
             public static List<Evento> ListarEventos()
             {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             try
             {
                 con.Open();                
                 MySqlCommand qry = new MySqlCommand(
-                    "SELECT * FROM Evento", con);
+                    "select * from evento", con);
                 MySqlDataReader reader = qry.ExecuteReader();
                 reader.Read();
                 while (reader.Read())
@@ -385,12 +407,12 @@ namespace TickUp.Models
         {
             string ultimoId = "";
 
-            MySqlConnection con = FabricaConexao.getConexao("casaGustavo");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             {
                 con.Open();
 
                 MySqlCommand qry = new MySqlCommand(
-                   "SELECT MAX(idEvento) FROM evento;", con);
+                   "select MAX(idEvento) FROM evento;", con);
 
                 using (MySqlDataReader reader = qry.ExecuteReader())
                 {

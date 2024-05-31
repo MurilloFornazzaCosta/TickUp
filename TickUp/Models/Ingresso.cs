@@ -41,11 +41,11 @@ namespace TickUp.Models
                 email = usuario.EmailUser;
                
 
-                using (MySqlConnection con = FabricaConexao.getConexao("casaGustavo"))
+                using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
                 {
                     con.Open();
 
-                    MySqlCommand qryDadosEvento = new MySqlCommand("SELECT ValorIngresso FROM Evento WHERE idEvento = @idEvento", con);
+                    MySqlCommand qryDadosEvento = new MySqlCommand("select ValorIngresso FROM evento WHERE idEvento = @idEvento", con);
                     qryDadosEvento.Parameters.AddWithValue("@idEvento", idEvento);
 
                     using (MySqlDataReader reader = qryDadosEvento.ExecuteReader())
@@ -60,7 +60,7 @@ namespace TickUp.Models
                         }
                     }
 
-                    MySqlCommand qry = new MySqlCommand("INSERT INTO Ingresso (idIngresso, valor, idEvento, email) VALUES (@idIngresso, @valor, @idEvento, @email)", con);
+                    MySqlCommand qry = new MySqlCommand("insert INTO ingresso (idIngresso, valor, idEvento, email) VALUES (@idIngresso, @valor, @idEvento, @email)", con);
                     qry.Parameters.AddWithValue("@idIngresso", idIngresso);
                     qry.Parameters.AddWithValue("@valor", valorIngresso);
                     qry.Parameters.AddWithValue("@idEvento", idEvento);
@@ -95,15 +95,18 @@ namespace TickUp.Models
 
             var eventos = new List<Evento>();
 
-            using (MySqlConnection con = FabricaConexao.getConexao("casaGustavo"))
+            using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
             {
                 con.Open();
 
-                var query = @"SELECT  Evento.* FROM Ingresso JOIN Evento ON Ingresso.idEvento = Evento.idEvento WHERE Ingresso.email = @Email";
+                var query = @"SELECT evento.*, ingresso.*
+              FROM ingresso 
+              JOIN evento ON ingresso.idEvento = evento.idEvento 
+              WHERE ingresso.email = @email"; ;
 
                 using (MySqlCommand command = new MySqlCommand(query, con))
                 {
-                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@email", email);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
