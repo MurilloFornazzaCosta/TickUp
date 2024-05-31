@@ -71,12 +71,9 @@ namespace TickUp.Controllers
         {
             Ingresso ingresso = new Ingresso();
 
-            // Obtém o email do usuário de algum lugar (por exemplo, da sessão)
 
-            // Chama o método para listar os ingressos do usuário
             List<Evento> eventos = ingresso.ListarIngressos(HttpContext);
 
-            // Passa a lista de eventos como modelo para a view
             return View(eventos);
         }
 
