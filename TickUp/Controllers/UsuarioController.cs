@@ -3,7 +3,7 @@ using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using System.IO.MemoryMappedFiles;
 using System.Text.Json.Serialization;
-using TickUp.Models; 
+using TickUp.Models;
 
 namespace TickUp.Controllers
 {
@@ -28,24 +28,24 @@ namespace TickUp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(string emailUser, string cpfUser, string nomeUser, string telefoneUser, string senhaUser, int idadeUser)
+        public IActionResult Cadastrar(string emailUser, string cpfUser, string nomeUser, string senhaUser, string telefoneUser, int idadeUser)
         {
-            Usuario user = new Usuario(emailUser, cpfUser, nomeUser, telefoneUser, senhaUser, idadeUser);
+            Usuario user = new Usuario(emailUser, cpfUser, nomeUser, senhaUser, telefoneUser, idadeUser);
             TempData["msg"] = user.InserirUsuario();
             return RedirectToAction("Cadastrar");
         }
 
         [HttpPost]
-        public IActionResult Login(string emailUser, string senhaUser)
+        public IActionResult Login(string emailUser, string cpfUser, string nomeUser, string senhaUser)
         {
-            Usuario usuario = new Usuario(emailUser, "", "", "", senhaUser, 0);
+            Usuario usuario = new Usuario(emailUser, cpfUser, nomeUser, senhaUser, "", 0);
 
             bool loginBemSucedido = Usuario.Login(usuario);
 
             if (loginBemSucedido)
             {
                 HttpContext.Session.SetString("user", JsonConvert.SerializeObject(usuario));
-                Response.Cookies.Append("user", JsonConvert.SerializeObject(usuario), 
+                Response.Cookies.Append("user", JsonConvert.SerializeObject(usuario),
                 new CookieOptions()
                 {
                     Expires = DateTime.Now.AddHours(1)
@@ -74,8 +74,11 @@ namespace TickUp.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
     }
+   
+
 
 }
+
+
+

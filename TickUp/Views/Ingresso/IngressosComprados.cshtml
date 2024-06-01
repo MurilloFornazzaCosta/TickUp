@@ -1,0 +1,38 @@
+﻿@model IEnumerable<TickUp.Models.Evento>
+@{
+    ViewData["Title"] = "View";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="/css/ingresso.css" rel="stylesheet" />
+    <title>Eventos Comprados</title>
+</head>
+<body>
+    <main>
+        
+        @foreach (var item in Model)
+        {
+            string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
+            <a href="@Url.Action("IngressosComprados", new { id = item.IdEvento })">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="img-evento" src="@formato" alt="Imagem do Evento">
+                    </div>
+                    <div class="card-details">
+                        <div class="data">@item.DataInicio.ToString("dd/MM/yyyy")</div>
+                        <div class="heading">@item.NomeEvento</div>
+                        <div class="author">@item.NomeLocal</div>
+                    </div>
+                </div>
+            </a>
+        }
+  
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+</body>
+</html>

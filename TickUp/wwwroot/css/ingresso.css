@@ -1,0 +1,50 @@
+﻿main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; 
+    padding: 20px; 
+}
+
+.card {
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+.card-image {
+    overflow: hidden;
+    height: 200px;
+}
+
+.img-evento {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-details {
+    padding: 20px;
+}
+
+.data {
+    font-size: 14px;
+    color: #666;
+}
+
+.heading {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.author {
+    font-size: 16px;
+    color: #888;
+    margin-top: 5px;
+}

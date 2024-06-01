@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,6 +11,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TickUp.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="/css/style.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
 
     
 </head>
@@ -34,17 +40,48 @@
                     <a asp-controller="Usuario" asp-action="Login">
                         <button type="button" class="btn btn-outline-primary me-2">Entrar</button>
                     </a>
+                    <a asp-controller="Usuario" asp-action="Cadastrar">
+                        <button type="button" class="btn btn-primary">Cadastrar</button>
+                    </a>
                 }
                 else
                 {
-                    <a asp-controller="Usuario" asp-action="Logout">
-                        <button type="button" class="btn btn-outline-primary me-2">Sair</button>
-                    </a>
+                    <div class="menuVertical" style="position: relative;">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" /></svg>
+
+                        <div id="listaItens" style="display: none; position: absolute; top: 40px; left: 0;">
+                           
+                            <ul class="list-group">
+                                <li class="list-group-item">Meus Eventos</li>
+                                <a asp-controller="Ingresso" asp-action="IngressosComprados">
+                                <li class="list-group-item">Meus Ingressos</li></a>
+                                <a asp-controller="Usuario" asp-action="Logout">
+                                <li class="list-group-item">Sair</li></a>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <script>
+                        
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var svgImagem = document.querySelector('svg[fill="#999999"]');
+                            svgImagem.addEventListener('click', function () {
+                               
+                                var listaItens = document.getElementById('listaItens');
+                                
+                                if (listaItens.style.display === 'none') {
+                                    listaItens.style.display = 'block';
+                                } else {
+                                    listaItens.style.display = 'none';
+                                }
+                            });
+                        });
+                    </script>
+
+
                 }
 
-                <a asp-controller="Usuario" asp-action="Cadastrar">
-                    <button type="button" class="btn btn-primary">Cadastrar</button>
-                </a>
+               
 </div>
         </header>
     </div>
@@ -54,7 +91,7 @@
             @RenderBody()
         </main>
     </div>
-
+@* 
     <footer class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
             <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
@@ -65,7 +102,7 @@
             </a>
             <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Cyber Squad</span>
         </div>
-    </footer>
+    </footer> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,3 +1,5 @@
+using TickUp.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,7 @@ builder.Services.AddSession(option =>
 {
     option.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+builder.Services.AddScoped<Autentificacao>();
 
 var app = builder.Build();
 
