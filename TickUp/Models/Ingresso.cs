@@ -41,7 +41,7 @@ namespace TickUp.Models
                 email = usuario.EmailUser;
                
 
-                using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
+                using (MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao"))
                 {
                     con.Open();
 
@@ -95,7 +95,7 @@ namespace TickUp.Models
 
             var eventos = new List<Evento>();
 
-            using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
+            using (MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao"))
             {
                 con.Open();
 

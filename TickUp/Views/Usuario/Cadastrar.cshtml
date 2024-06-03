@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="date" class="form-label">Data de nascimento</label>
+                            <label for="date" class="form-label">Idade</label>
                             <input asp-for="IdadeUser" name="idadeUser" type="number" class="form-control" id="idadeUser" required="">
                             <div class="invalid-feedback">
                                 Please enter your birth date.
@@ -84,11 +84,11 @@
             $(document).ready(function () {
                 var cpfInput = $('#cpfUser');
                 var telefoneUser = $('#telefoneUser');
-                var emailInput = $('#emailUser');
+               
 
                 cpfInput.inputmask("");
                 telefoneUser.inputmask("(99) 99999-9999");
-                emailInput.inputmask({ alias: "email" });
+              
 
                 cpfInput.on('input', function () {
                     var valor = $(this).val().replace(/\D/g, ''); 
