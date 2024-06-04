@@ -173,7 +173,7 @@ namespace TickUp.Models
 
         public string Inserir(HttpContext httpContext)
         {
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
 
             try
             {
@@ -239,7 +239,7 @@ namespace TickUp.Models
         }
         public static Evento MostrarEvento(string idEvento)
         {
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             try
             {
                 con.Open();
@@ -323,12 +323,444 @@ namespace TickUp.Models
             Evento eventoVazio2 = new Evento("", "", "", "", "", "", "", "", "", dataVazia2, dataVazia2, 0, [], "", "", "", "", "", "", "", "");
             return eventoVazio2;
 
-        }            
+        }
 
-            public static List<Evento> ListarEventos()
+
+        public static List<Evento> MostrarEventoShows()
+        {
+            List<Evento> eventosShows = new List<Evento>();
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
+            try
+            {
+                con.Open();
+                MySqlCommand qry = new MySqlCommand(
+                    "select * from evento WHERE categoriaEvento = 'Shows' ;", con);
+
+                using (MySqlDataReader reader = qry.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string assunto = reader["assuntoEvento"].ToString();
+                        string categoria = reader["categoriaEvento"].ToString();
+                        string nome = reader["nomeEvento"].ToString();
+                        string emailContato = reader["emailContato"].ToString();
+                        string observacoes = reader["observacoes"].ToString();
+                        string idevento = reader["idEvento"].ToString();
+                        string horarioInicio = reader["horarioInicio"].ToString();
+                        string horarioTermino = reader["horarioTermino"].ToString();
+                        string cpf = reader["cpf"].ToString();
+                        string email = reader["email"].ToString();
+                        DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                        DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString());
+                        int capacidade = (int)reader["capacidade"];
+                        byte[] byteImagem = (byte[])reader["imagem"];
+                        string nomeLocal = reader["nomeLocal"].ToString();
+                        string cep = reader["cep"].ToString();
+                        string rua = reader["rua"].ToString();
+                        string numero = reader["numero"].ToString();
+                        string complemento = reader["complemento"].ToString();
+                        string bairro = reader["bairro"].ToString();
+                        string estado = reader["estado"].ToString();
+                        string cidade = reader["cidade"].ToString();
+                        double valorIngresso = (double)reader["valorIngresso"];
+
+                        Evento evento = new Evento(
+                            assunto,
+                            categoria,
+                            nome,
+                            emailContato,
+                            observacoes,
+                            idevento,
+                            horarioInicio,
+                            horarioTermino,
+                            cpf,
+                            email,
+                            dataInicio,
+                            dataTermino,
+                            capacidade,
+                            byteImagem,
+                            nomeLocal,
+                            cep,
+                            rua,
+                            numero,
+                            complemento,
+                            bairro,
+                            estado,
+                            cidade,
+                            valorIngresso
+
+                        );
+
+                        eventosShows.Add(evento);
+
+                        return eventosShows;
+
+                    }
+                    con.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return eventosShows;
+
+            }
+  
+            return eventosShows;
+
+        }
+
+        public static List<Evento> MostrarEventoRestaurantes()
+        {
+            List<Evento> eventosRestaurantes = new List<Evento>();
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
+            try
+            {
+                con.Open();
+                MySqlCommand qry = new MySqlCommand(
+                    "select * from evento WHERE categoriaEvento = 'Restaurantes' ;", con);
+
+                using (MySqlDataReader reader = qry.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string assunto = reader["assuntoEvento"].ToString();
+                        string categoria = reader["categoriaEvento"].ToString();
+                        string nome = reader["nomeEvento"].ToString();
+                        string emailContato = reader["emailContato"].ToString();
+                        string observacoes = reader["observacoes"].ToString();
+                        string idevento = reader["idEvento"].ToString();
+                        string horarioInicio = reader["horarioInicio"].ToString();
+                        string horarioTermino = reader["horarioTermino"].ToString();
+                        string cpf = reader["cpf"].ToString();
+                        string email = reader["email"].ToString();
+                        DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                        DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString());
+                        int capacidade = (int)reader["capacidade"];
+                        byte[] byteImagem = (byte[])reader["imagem"];
+                        string nomeLocal = reader["nomeLocal"].ToString();
+                        string cep = reader["cep"].ToString();
+                        string rua = reader["rua"].ToString();
+                        string numero = reader["numero"].ToString();
+                        string complemento = reader["complemento"].ToString();
+                        string bairro = reader["bairro"].ToString();
+                        string estado = reader["estado"].ToString();
+                        string cidade = reader["cidade"].ToString();
+                        double valorIngresso = (double)reader["valorIngresso"];
+
+                        Evento evento = new Evento(
+                            assunto,
+                            categoria,
+                            nome,
+                            emailContato,
+                            observacoes,
+                            idevento,
+                            horarioInicio,
+                            horarioTermino,
+                            cpf,
+                            email,
+                            dataInicio,
+                            dataTermino,
+                            capacidade,
+                            byteImagem,
+                            nomeLocal,
+                            cep,
+                            rua,
+                            numero,
+                            complemento,
+                            bairro,
+                            estado,
+                            cidade,
+                            valorIngresso
+
+                        );
+
+                        eventosRestaurantes.Add(evento);
+
+                        return eventosRestaurantes;
+
+                    }
+                    con.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return eventosRestaurantes;
+
+            }
+
+            return eventosRestaurantes;
+
+        }
+
+        public static List<Evento> MostrarEventoPalestras()
+        {
+            List<Evento> eventosPalestras = new List<Evento>();
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
+            try
+            {
+                con.Open();
+                MySqlCommand qry = new MySqlCommand(
+                    "select * from evento WHERE categoriaEvento = 'Palestras' ;", con);
+
+                using (MySqlDataReader reader = qry.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string assunto = reader["assuntoEvento"].ToString();
+                        string categoria = reader["categoriaEvento"].ToString();
+                        string nome = reader["nomeEvento"].ToString();
+                        string emailContato = reader["emailContato"].ToString();
+                        string observacoes = reader["observacoes"].ToString();
+                        string idevento = reader["idEvento"].ToString();
+                        string horarioInicio = reader["horarioInicio"].ToString();
+                        string horarioTermino = reader["horarioTermino"].ToString();
+                        string cpf = reader["cpf"].ToString();
+                        string email = reader["email"].ToString();
+                        DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                        DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString());
+                        int capacidade = (int)reader["capacidade"];
+                        byte[] byteImagem = (byte[])reader["imagem"];
+                        string nomeLocal = reader["nomeLocal"].ToString();
+                        string cep = reader["cep"].ToString();
+                        string rua = reader["rua"].ToString();
+                        string numero = reader["numero"].ToString();
+                        string complemento = reader["complemento"].ToString();
+                        string bairro = reader["bairro"].ToString();
+                        string estado = reader["estado"].ToString();
+                        string cidade = reader["cidade"].ToString();
+                        double valorIngresso = (double)reader["valorIngresso"];
+
+                        Evento evento = new Evento(
+                            assunto,
+                            categoria,
+                            nome,
+                            emailContato,
+                            observacoes,
+                            idevento,
+                            horarioInicio,
+                            horarioTermino,
+                            cpf,
+                            email,
+                            dataInicio,
+                            dataTermino,
+                            capacidade,
+                            byteImagem,
+                            nomeLocal,
+                            cep,
+                            rua,
+                            numero,
+                            complemento,
+                            bairro,
+                            estado,
+                            cidade,
+                            valorIngresso
+
+                        );
+
+                        eventosPalestras.Add(evento);
+
+                        return eventosPalestras;
+
+                    }
+                    con.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return eventosPalestras;
+
+            }
+
+            return eventosPalestras;
+
+        }
+
+
+        public static List<Evento> MostrarEventoTeatros()
+        {
+            List<Evento> eventosTeatros = new List<Evento>();
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
+            try
+            {
+                con.Open();
+                MySqlCommand qry = new MySqlCommand(
+                    "select * from evento WHERE categoriaEvento = 'Teatros' ;", con);
+
+                using (MySqlDataReader reader = qry.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string assunto = reader["assuntoEvento"].ToString();
+                        string categoria = reader["categoriaEvento"].ToString();
+                        string nome = reader["nomeEvento"].ToString();
+                        string emailContato = reader["emailContato"].ToString();
+                        string observacoes = reader["observacoes"].ToString();
+                        string idevento = reader["idEvento"].ToString();
+                        string horarioInicio = reader["horarioInicio"].ToString();
+                        string horarioTermino = reader["horarioTermino"].ToString();
+                        string cpf = reader["cpf"].ToString();
+                        string email = reader["email"].ToString();
+                        DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                        DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString());
+                        int capacidade = (int)reader["capacidade"];
+                        byte[] byteImagem = (byte[])reader["imagem"];
+                        string nomeLocal = reader["nomeLocal"].ToString();
+                        string cep = reader["cep"].ToString();
+                        string rua = reader["rua"].ToString();
+                        string numero = reader["numero"].ToString();
+                        string complemento = reader["complemento"].ToString();
+                        string bairro = reader["bairro"].ToString();
+                        string estado = reader["estado"].ToString();
+                        string cidade = reader["cidade"].ToString();
+                        double valorIngresso = (double)reader["valorIngresso"];
+
+                        Evento evento = new Evento(
+                            assunto,
+                            categoria,
+                            nome,
+                            emailContato,
+                            observacoes,
+                            idevento,
+                            horarioInicio,
+                            horarioTermino,
+                            cpf,
+                            email,
+                            dataInicio,
+                            dataTermino,
+                            capacidade,
+                            byteImagem,
+                            nomeLocal,
+                            cep,
+                            rua,
+                            numero,
+                            complemento,
+                            bairro,
+                            estado,
+                            cidade,
+                            valorIngresso
+
+                        );
+
+                        eventosTeatros.Add(evento);
+
+                        return eventosTeatros;
+
+                    }
+                    con.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return eventosTeatros;
+
+            }
+
+            return eventosTeatros;
+
+        }
+
+        public static List<Evento> MostrarEventoStandUp()
+        {
+            List<Evento> eventosStandUp = new List<Evento>();
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
+            try
+            {
+                con.Open();
+                MySqlCommand qry = new MySqlCommand(
+                    "select * from evento WHERE categoriaEvento = 'Stand Up' ;", con);
+
+                using (MySqlDataReader reader = qry.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string assunto = reader["assuntoEvento"].ToString();
+                        string categoria = reader["categoriaEvento"].ToString();
+                        string nome = reader["nomeEvento"].ToString();
+                        string emailContato = reader["emailContato"].ToString();
+                        string observacoes = reader["observacoes"].ToString();
+                        string idevento = reader["idEvento"].ToString();
+                        string horarioInicio = reader["horarioInicio"].ToString();
+                        string horarioTermino = reader["horarioTermino"].ToString();
+                        string cpf = reader["cpf"].ToString();
+                        string email = reader["email"].ToString();
+                        DateOnly dataInicio = DateOnly.Parse(reader["dataInicio"].ToString());
+                        DateOnly dataTermino = DateOnly.Parse(reader["dataTermino"].ToString());
+                        int capacidade = (int)reader["capacidade"];
+                        byte[] byteImagem = (byte[])reader["imagem"];
+                        string nomeLocal = reader["nomeLocal"].ToString();
+                        string cep = reader["cep"].ToString();
+                        string rua = reader["rua"].ToString();
+                        string numero = reader["numero"].ToString();
+                        string complemento = reader["complemento"].ToString();
+                        string bairro = reader["bairro"].ToString();
+                        string estado = reader["estado"].ToString();
+                        string cidade = reader["cidade"].ToString();
+                        double valorIngresso = (double)reader["valorIngresso"];
+
+                        Evento evento = new Evento(
+                            assunto,
+                            categoria,
+                            nome,
+                            emailContato,
+                            observacoes,
+                            idevento,
+                            horarioInicio,
+                            horarioTermino,
+                            cpf,
+                            email,
+                            dataInicio,
+                            dataTermino,
+                            capacidade,
+                            byteImagem,
+                            nomeLocal,
+                            cep,
+                            rua,
+                            numero,
+                            complemento,
+                            bairro,
+                            estado,
+                            cidade,
+                            valorIngresso
+
+                        );
+
+                        eventosStandUp.Add(evento);
+
+                        return eventosStandUp;
+
+                    }
+                    con.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return eventosStandUp;
+
+            }
+
+            return eventosStandUp;
+
+        }
+
+        public static List<Evento> ListarEventos()
             {
             List<Evento> eventos = new List<Evento>();
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             try
             {
                 con.Open();                
@@ -407,7 +839,7 @@ namespace TickUp.Models
         {
             string ultimoId = "";
 
-            MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao");
+            MySqlConnection con = FabricaConexao.getConexao("jawsdb");
             {
                 con.Open();
 

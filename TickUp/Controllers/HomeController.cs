@@ -26,27 +26,27 @@ namespace TickUp.Controllers
 
         public IActionResult Palestras()
         {
-            return View();
+            return View(Evento.MostrarEventoPalestras());
         }
 
         public IActionResult Restaurante() 
         { 
-            return View(); 
+            return View(Evento.MostrarEventoRestaurantes()); 
         }
 
         public IActionResult ShowFestas()
         {
-            return View();
+            return View(Evento.MostrarEventoShows());
         }
 
         public IActionResult StandUp()
         {
-            return View();
+            return View(Evento.MostrarEventoStandUp());
         }
 
         public IActionResult Teatros()
         {
-            return View();
+            return View(Evento.MostrarEventoTeatros());
         }
 
 
