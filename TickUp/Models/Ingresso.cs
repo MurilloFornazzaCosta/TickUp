@@ -19,7 +19,7 @@ namespace TickUp.Models
         }
         
 
-        public string IngressoComprado(string idEvento, string idIngresso, HttpContext httpContext)
+        public string IngressoComprado(string idEvento, string idIngresso, int capacidade, HttpContext httpContext)
         {
             string mensagem = "Comprado com sucesso";
 
@@ -41,12 +41,12 @@ namespace TickUp.Models
                 email = usuario.EmailUser;
                
 
-                using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
+                using (MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao"))
                 {
                     con.Open();
 
                     MySqlCommand qryDadosEvento = new MySqlCommand("select ValorIngresso FROM evento WHERE idEvento = @idEvento", con);
-                    qryDadosEvento.Parameters.AddWithValue("@idEvento", idEvento);
+                    qryDadosEvento.Parameters.AddWithValue("@idEvento", idEvento); 
 
                     using (MySqlDataReader reader = qryDadosEvento.ExecuteReader())
                     {
@@ -95,7 +95,7 @@ namespace TickUp.Models
 
             var eventos = new List<Evento>();
 
-            using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
+            using (MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao"))
             {
                 con.Open();
 

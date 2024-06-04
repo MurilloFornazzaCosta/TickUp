@@ -38,32 +38,53 @@ namespace TickUp.Controllers
         }
 
         [HttpGet]
-        public IActionResult PegarIngresso(string idEvento, int quantidadeIngresso)
+        public IActionResult PegarIngresso(string idEvento, int quantidadeIngresso, int capacidade)
         {
             FirebaseResponse response = client.Get(idEvento);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Dictionary<string, Ingresso> ingressosDic = JsonConvert.DeserializeObject<Dictionary<string, Ingresso>>(response.Body);
+                
 
-                int count = 0;
 
-                foreach (var ingresso in ingressosDic)
-                {
-                    if (count >= quantidadeIngresso)
+                int ingressosRestantes = capacidade;
+
+                    if (ingressosRestantes < quantidadeIngresso)
                     {
-                        break;
+                        // Se não houver ingressos suficientes, definir a mensagem de erro e retornar a view de erro
+                        ViewBag.ErrorMessage = "Não há ingressos suficientes disponíveis.";
+               
+                    }
+                    else
+                    {
+                        // Se houver ingressos suficientes, prosseguir com o processamento dos ingressos
+                        foreach (var ingresso in ingressosDic)
+                        {
+                            string idIngresso = ingresso.Key;
+                            Ingresso ingressoModel = new Ingresso();
+                            ingressoModel.IngressoComprado(idEvento, idIngresso, HttpContext);
+                            client.Delete($"{idEvento}/{idIngresso}");
+                            ingressosRestantes--;
+
+                            // Verificar se a quantidade de ingressos restantes é menor que a quantidade desejada
+                            if (ingressosRestantes < quantidadeIngresso)
+                            {
+                                // Se a quantidade de ingressos restantes for menor que a quantidade desejada,
+                                // não é necessário continuar o loop, pois já sabemos que não há ingressos suficientes
+                                break;
+                            }
+                        }
+
+                        // Após o processamento dos ingressos, redirecionar para outra ação
+                        return RedirectToAction("MostrarEvento", "Home");
                     }
 
-                    string idIngresso = ingresso.Key;
-                    Ingresso ingressoModel = new Ingresso();
-                    ingressoModel.IngressoComprado(idEvento, idIngresso, HttpContext);
-                    client.Delete($"{idEvento}/{idIngresso}");
-                    count++;
-                }
+
             }
 
-            return RedirectToAction("CriarEvento", "Evento");
+
+            return RedirectToAction("Index", "Home");
         }
 
 
