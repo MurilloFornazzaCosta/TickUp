@@ -319,9 +319,11 @@ namespace TickUp.Models
 
             }
 
-            DateOnly dataVazia2 = new DateOnly(0000, 00, 00);
-            Evento eventoVazio2 = new Evento("", "", "", "", "", "", "", "", "", dataVazia2, dataVazia2, 0, [], "", "", "", "", "", "", "", "");
-            return eventoVazio2;
+            //DateOnly dataVazia2 = new DateOnly(0000, 00, 00);
+            //Evento eventoVazio2 = new Evento("", "", "", "", "", "", "", "", "", dataVazia2, dataVazia2, 0, [], "", "", "", "", "", "", "", "");
+            //return eventoVazio2;
+            Evento e = new Evento();
+            return e;
 
         }
 
@@ -394,14 +396,10 @@ namespace TickUp.Models
 
                         eventosShows.Add(evento);
 
-                        
 
                     }
 
                     con.Close();
-
-                   
-
                 }
             }
             catch (Exception ex)
@@ -483,7 +481,6 @@ namespace TickUp.Models
 
                         eventosRestaurantes.Add(evento);
 
-                        
 
                     }
                     con.Close();
@@ -569,7 +566,6 @@ namespace TickUp.Models
 
                         eventosPalestras.Add(evento);
 
-                        
 
                     }
                     con.Close();
@@ -656,7 +652,6 @@ namespace TickUp.Models
 
                         eventosTeatros.Add(evento);
 
-                        
 
                     }
                     con.Close();
@@ -742,7 +737,6 @@ namespace TickUp.Models
 
                         eventosStandUp.Add(evento);
 
-                        
 
                     }
                     con.Close();

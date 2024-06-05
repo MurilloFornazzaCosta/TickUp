@@ -26,7 +26,7 @@ namespace TickUp.Controllers
 
         public IActionResult MostrarEvento()
         {
-
+       
             return View();
         }
 

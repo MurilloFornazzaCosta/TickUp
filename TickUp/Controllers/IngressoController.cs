@@ -38,64 +38,51 @@ namespace TickUp.Controllers
         }
 
         [HttpGet]
-        [HttpGet]
-        public IActionResult PegarIngresso(string idEvento, int quantidadeIngresso)
+        public ActionResult PegarIngresso(string idEvento, int quantidadeIngresso)
         {
             FirebaseResponse response = client.Get(idEvento);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Dictionary<string, Ingresso> ingressosDic = JsonConvert.DeserializeObject<Dictionary<string, Ingresso>>(response.Body);
+                int ingressosRestantes = ingressosDic.Count;
 
-                Ingresso ingressoObj = new Ingresso();
+                if (ingressosRestantes < quantidadeIngresso)
+                {
+                    TempData["msg"] = "Não há ingressos suficientes disponíveis.";
+                    return RedirectToAction("MostrarEvento", "Home", new { id = idEvento });
 
-                // Obter a capacidade do evento
-                int capacidadeEvento = ingressoObj.ObterCapacidadeDoEvento(idEvento);
-
-              
-                    int ingressosRestantes =  ingressosDic.Count - quantidadeIngresso ;
-
-                    if (ingressosRestantes < quantidadeIngresso)
+                }
+                else
+                {
+                    int count = 0;
+                    foreach (var ingresso in ingressosDic)
                     {
-                        // Se não houver ingressos suficientes, definir a mensagem de erro e retornar a view de erro
-                        ViewBag.ErrorMessage = "Não há ingressos suficientes disponíveis.";
-                        return View("Erro");
-                    }
-                    else
-                    {
-                        // Se houver ingressos suficientes, prosseguir com o processamento dos ingressos
-                        int count = 0;
-                        foreach (var ingresso in ingressosDic)
+                        if (count >= quantidadeIngresso)
                         {
-                            if (count >= quantidadeIngresso)
-                            {
-                                // Se já compramos a quantidade desejada de ingressos, sair do loop
-                                break;
-                            }
-
-                            string idIngresso = ingresso.Key;
-                            string mensagem = ingressoObj.IngressoComprado(idEvento, idIngresso, HttpContext);
-
-                            if (mensagem == "Comprado com sucesso")
-                            {
-                                client.Delete($"{idEvento}/{idIngresso}");
-                                count++;
-                            }
-                            else
-                            {
-                                ViewBag.ErrorMessage = mensagem;
-                                return View("Error", "Shared");
-                            }
+                            break;
                         }
 
-                        // Após o processamento dos ingressos, redirecionar para outra ação
-                        return RedirectToAction();
+                        string idIngresso = ingresso.Key;
+                        string mensagem = new Ingresso().IngressoComprado(idEvento, idIngresso, HttpContext);
+
+                        if (mensagem == "Comprado com sucesso")
+                        {
+                            client.Delete($"{idEvento}/{idIngresso}");
+                            count++;
+                        }
+                        else
+                        {
+                            TempData["msg"] = mensagem;
+                            return RedirectToAction("MostrarEvento", "Home");
+                        }
                     }
-
+   
+                    return RedirectToAction("MostrarEvento", "Home");
+                }
             }
-
-            // Se não foi possível obter os dados do evento, redirecionar para a página inicial
-            return RedirectToAction("Index", "Home");
+          
+            return RedirectToAction("MostrarEvento", "Home");
         }
 
 
