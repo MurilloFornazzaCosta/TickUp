@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySqlX.XDevAPI;
 using Newtonsoft.Json;
-using System.IO.MemoryMappedFiles;
-using System.Text.Json.Serialization;
 using TickUp.Models;
 
 namespace TickUp.Controllers
@@ -18,21 +15,21 @@ namespace TickUp.Controllers
             return View();
         }
 
-        public IActionResult Login()
-        {
-            if (ViewBag.ErrorMessage != null)
-            {
-                ViewBag.ErrorMessage = ViewBag.ErrorMessage;
-            }
-            return View();
-        }
-
         [HttpPost]
         public IActionResult Cadastrar(string emailUser, string cpfUser, string nomeUser, string senhaUser, string telefoneUser, int idadeUser)
         {
             Usuario user = new Usuario(emailUser, cpfUser, nomeUser, senhaUser, telefoneUser, idadeUser);
             TempData["msg"] = user.InserirUsuario();
             return RedirectToAction("Cadastrar");
+        }
+
+        public IActionResult Login()
+        {
+            if (TempData.ContainsKey("msg"))
+            {
+                ViewBag.Message = TempData["msg"];
+            }
+            return View();
         }
 
         [HttpPost]
@@ -54,10 +51,12 @@ namespace TickUp.Controllers
             }
             else
             {
-                ViewBag.ErrorMessage = "Usuário ou senha incorretos.";
-                return View();
+                TempData["msg"] = "Email ou senha incorreto";
+                return RedirectToAction("Login");
             }
         }
+
+
         public IActionResult Logout()
         {
             var userSession = HttpContext.Session.GetString("user");
@@ -75,10 +74,4 @@ namespace TickUp.Controllers
             return RedirectToAction("Index", "Home");
         }
     }
-   
-
-
 }
-
-
-

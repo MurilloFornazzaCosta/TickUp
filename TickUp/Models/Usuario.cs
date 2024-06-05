@@ -25,6 +25,9 @@ namespace TickUp.Models
             this.senhaUser = senhaUser;
             this.idadeUser = idadeUser;
         }
+        public Usuario(){
+
+        }
 
         public string InserirUsuario()
         {
@@ -76,7 +79,6 @@ namespace TickUp.Models
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao executar login: {ex.Message}"); 
                 return false; 
             }
             finally

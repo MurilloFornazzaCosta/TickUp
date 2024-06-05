@@ -13,14 +13,22 @@ namespace TickUp.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
+            if (TempData.ContainsKey("msg"))
+            {
+                ViewBag.Message = TempData["msg"];
+            }
             return View(Evento.ListarEventos());
         }
 
         public IActionResult MostrarEvento(string id)
         {
-
+            if (TempData.ContainsKey("msg"))
+            {
+                ViewBag.Message = TempData["msg"];
+            }
             return View(Evento.MostrarEvento(id));
         }
 

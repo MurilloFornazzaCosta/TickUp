@@ -8,7 +8,6 @@ namespace TickUp.Models
     public class Ingresso : Evento
     {
 
-        Evento evento = new Evento();
 
         public Ingresso(string assuntoEvento, string categoriaEvento, string nomeEvento, string emailContato, string observacoes, string idEvento, string horarioInicio, string horarioTermino, string cpf, string email, DateOnly dataInicio, DateOnly dataTermino, int capacidade, byte[] bytesImagem, string nomeLocal, string cep, string rua, string numero, string complemento, string bairro, string estado, string cidade, double valorIngresso) : base(assuntoEvento, categoriaEvento, nomeEvento, emailContato, observacoes, idEvento, horarioInicio, horarioTermino, cpf, email, dataInicio, dataTermino, capacidade, bytesImagem, nomeLocal, cep, rua, numero, complemento, bairro, estado, cidade, valorIngresso)
         {
@@ -18,39 +17,6 @@ namespace TickUp.Models
 
         }
 
-
-        public int ObterCapacidadeDoEvento(string idEvento)
-        {
-            int capacidade = 0;
-            try
-            {
-                using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
-                {
-                    con.Open();
-
-                    MySqlCommand qryDadosEvento = new MySqlCommand("SELECT capacidade FROM evento WHERE idEvento = @idEvento", con);
-                    qryDadosEvento.Parameters.AddWithValue("@idEvento", idEvento);
-
-                    using (MySqlDataReader reader = qryDadosEvento.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            capacidade = Convert.ToInt32(reader["capacidade"]);
-                        }
-                        else
-                        {
-                            throw new Exception("Evento não encontrado");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao obter a capacidade do evento: {ex.Message}");
-            }
-
-            return capacidade;
-        }
 
         public string IngressoComprado(string idEvento, string idIngresso, HttpContext httpContext)
         {
@@ -132,10 +98,7 @@ namespace TickUp.Models
             {
                 con.Open();
 
-                var query = @"SELECT evento.*, ingresso.*
-              FROM ingresso 
-              JOIN evento ON ingresso.idEvento = evento.idEvento 
-              WHERE ingresso.email = @email"; ;
+                var query = @"SELECT evento.*, ingresso.* FROM ingresso JOIN evento ON ingresso.idEvento = evento.idEvento WHERE ingresso.email = @email"; ;
 
                 using (MySqlCommand command = new MySqlCommand(query, con))
                 {

@@ -12,6 +12,7 @@ builder.Services.AddSession(option =>
 });
 builder.Services.AddScoped<Autentificacao>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
