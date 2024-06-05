@@ -22,7 +22,7 @@ namespace TickUp.Controllers
             }
             return View(Evento.ListarEventos());
         }
-
+        
         public IActionResult MostrarEvento(string id)
         {
             if (TempData.ContainsKey("msg"))

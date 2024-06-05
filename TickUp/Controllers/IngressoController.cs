@@ -74,15 +74,15 @@ namespace TickUp.Controllers
                         else
                         {
                             TempData["msg"] = mensagem;
-                            return RedirectToAction("MostrarEvento", "Home");
+                            return RedirectToAction("Login", "Usuario");
                         }
                     }
    
-                    return RedirectToAction("MostrarEvento", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
           
-            return RedirectToAction("MostrarEvento", "Home");
+            return RedirectToAction("MostrarEvento", "Evento");
         }
 
 

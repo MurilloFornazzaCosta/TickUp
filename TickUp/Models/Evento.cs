@@ -319,9 +319,7 @@ namespace TickUp.Models
 
             }
 
-            //DateOnly dataVazia2 = new DateOnly(0000, 00, 00);
-            //Evento eventoVazio2 = new Evento("", "", "", "", "", "", "", "", "", dataVazia2, dataVazia2, 0, [], "", "", "", "", "", "", "", "");
-            //return eventoVazio2;
+         
             Evento e = new Evento();
             return e;
 

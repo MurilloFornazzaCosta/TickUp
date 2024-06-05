@@ -23,7 +23,7 @@ namespace TickUp.Controllers
         {
             return View();
         }
-
+        [ServiceFilter(typeof(Autentificacao))]
         public IActionResult MostrarEvento()
         {
        
