@@ -17,9 +17,42 @@ namespace TickUp.Models
         {
 
         }
-        
 
-        public string IngressoComprado(string idEvento, string idIngresso, int capacidade, HttpContext httpContext)
+
+        public int ObterCapacidadeDoEvento(string idEvento)
+        {
+            int capacidade = 0;
+            try
+            {
+                using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
+                {
+                    con.Open();
+
+                    MySqlCommand qryDadosEvento = new MySqlCommand("SELECT capacidade FROM evento WHERE idEvento = @idEvento", con);
+                    qryDadosEvento.Parameters.AddWithValue("@idEvento", idEvento);
+
+                    using (MySqlDataReader reader = qryDadosEvento.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            capacidade = Convert.ToInt32(reader["capacidade"]);
+                        }
+                        else
+                        {
+                            throw new Exception("Evento não encontrado");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao obter a capacidade do evento: {ex.Message}");
+            }
+
+            return capacidade;
+        }
+
+        public string IngressoComprado(string idEvento, string idIngresso, HttpContext httpContext)
         {
             string mensagem = "Comprado com sucesso";
 
@@ -41,7 +74,7 @@ namespace TickUp.Models
                 email = usuario.EmailUser;
                
 
-                using (MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao"))
+                using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
                 {
                     con.Open();
 
@@ -95,7 +128,7 @@ namespace TickUp.Models
 
             var eventos = new List<Evento>();
 
-            using (MySqlConnection con = FabricaConexao.getConexao("ConexaoPadrao"))
+            using (MySqlConnection con = FabricaConexao.getConexao("jawsdb"))
             {
                 con.Open();
 

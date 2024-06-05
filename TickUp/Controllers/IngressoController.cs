@@ -38,41 +38,53 @@ namespace TickUp.Controllers
         }
 
         [HttpGet]
-        public IActionResult PegarIngresso(string idEvento, int quantidadeIngresso, int capacidade)
+        [HttpGet]
+        public IActionResult PegarIngresso(string idEvento, int quantidadeIngresso)
         {
             FirebaseResponse response = client.Get(idEvento);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Dictionary<string, Ingresso> ingressosDic = JsonConvert.DeserializeObject<Dictionary<string, Ingresso>>(response.Body);
-                
 
+                Ingresso ingressoObj = new Ingresso();
 
-                int ingressosRestantes = capacidade;
+                // Obter a capacidade do evento
+                int capacidadeEvento = ingressoObj.ObterCapacidadeDoEvento(idEvento);
+
+              
+                    int ingressosRestantes =  ingressosDic.Count - quantidadeIngresso ;
 
                     if (ingressosRestantes < quantidadeIngresso)
                     {
                         // Se não houver ingressos suficientes, definir a mensagem de erro e retornar a view de erro
                         ViewBag.ErrorMessage = "Não há ingressos suficientes disponíveis.";
-               
+                        return View("Erro");
                     }
                     else
                     {
                         // Se houver ingressos suficientes, prosseguir com o processamento dos ingressos
+                        int count = 0;
                         foreach (var ingresso in ingressosDic)
                         {
-                            string idIngresso = ingresso.Key;
-                            Ingresso ingressoModel = new Ingresso();
-                            ingressoModel.IngressoComprado(idEvento, idIngresso, HttpContext);
-                            client.Delete($"{idEvento}/{idIngresso}");
-                            ingressosRestantes--;
-
-                            // Verificar se a quantidade de ingressos restantes é menor que a quantidade desejada
-                            if (ingressosRestantes < quantidadeIngresso)
+                            if (count >= quantidadeIngresso)
                             {
-                                // Se a quantidade de ingressos restantes for menor que a quantidade desejada,
-                                // não é necessário continuar o loop, pois já sabemos que não há ingressos suficientes
+                                // Se já compramos a quantidade desejada de ingressos, sair do loop
                                 break;
+                            }
+
+                            string idIngresso = ingresso.Key;
+                            string mensagem = ingressoObj.IngressoComprado(idEvento, idIngresso, HttpContext);
+
+                            if (mensagem == "Comprado com sucesso")
+                            {
+                                client.Delete($"{idEvento}/{idIngresso}");
+                                count++;
+                            }
+                            else
+                            {
+                                ViewBag.ErrorMessage = mensagem;
+                                return View("Error", "Shared");
                             }
                         }
 
@@ -80,12 +92,12 @@ namespace TickUp.Controllers
                         return RedirectToAction("MostrarEvento", "Home");
                     }
 
-
             }
 
-
+            // Se não foi possível obter os dados do evento, redirecionar para a página inicial
             return RedirectToAction("Index", "Home");
         }
+
 
 
         public IActionResult IngressosComprados()
