@@ -31,24 +31,24 @@
             <div class="categorias">
 
                 <div class="categoria-item">
-                    <a asp-controller="Home" asp-action="ShowFestas"><img src="/images/festa_icon.png" alt=""></a>
+                    <a asp-controller="Home" asp-action="ShowFestas"><img src="/images/dance.png" alt=""></a>
                     <h6 class="shows-text">shows e festas</h6>
                 </div>
 
                 <div class="categoria-item">
-                    <a asp-controller="Home" asp-action="Restaurante"><img src="/images/gastro_icon.png" alt=""></a>
+                    <a asp-controller="Home" asp-action="Restaurante"><img src="/images/restaurant.png" alt=""></a>
                     <h6 class="restaurantes-text">restaurantes</h6>
                 </div>
                 <div class="categoria-item">
-                    <a asp-controller="Home" asp-action="Palestras"><img src="/images/palestra_icon.png" alt=""></a>
+                    <a asp-controller="Home" asp-action="Palestras"><img src="/images/lecture.png" alt=""></a>
                     <h6 class="palestras-text">palestras</h6>
                 </div>
                 <div class="categoria-item">
-                    <a asp-controller="Home" asp-action="StandUp"><img src="/images/stand_icon.png" alt=""></a>
+                    <a asp-controller="Home" asp-action="StandUp"><img src="/images/stand-up.png" alt=""></a>
                     <h6 class="stand-text">stand up</h6>
                 </div>
                 <div class="categoria-item">
-                    <a asp-controller="Home" asp-action="Teatros"><img src="/images/teatro_icon.png" alt=""></a>
+                    <a asp-controller="Home" asp-action="Teatros"><img src="/images/opera.png" alt=""></a>
                     <h6 class="teatros-text">teatros</h6>
                 </div>
             </div>
@@ -84,6 +84,7 @@
                         <br>
                         <p class="descricao-d">Pria da barra</p>
                     </div>
+
                     <div class="slide">
                         <img src="/images/img2.jpg" alt="">
                     </div>
@@ -149,15 +150,21 @@
                 <!--fim radio buttons-->
                 <!--slide images-->
 
-                @{
-                    //var url = Url.Action("ActionName", "ControllerName", new { id = item.Id });
-                }
+
+                <div class="card first">
+                    <div class="card-image"> <img class="img_evento_min" src="/images/img1.jpg" alt=""> </div>
+                    <div class="data"> 12/06/2024 </div>
+                    <div class="heading">
+                        Pop-Show
+                        <div class="author">  <span class="name">Kitnetbar</span> </div>
+                    </div>
+                </div>
 
                 @foreach(var item in Model)
                 {
                     string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
                     <a href="@Url.Action("MostrarEvento", new { id = item.IdEvento })">
-                    <div class="card first">
+                    <div class="card">
                         <div class="card-image"> <img class="img_evento_min" src=@formato alt=""> </div>
                         <div class="data">
                             @Html.DisplayFor(modelItem => item.DataInicio)
@@ -172,42 +179,6 @@
                     
                 }
 
-
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
 
                 
 

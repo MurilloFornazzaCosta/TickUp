@@ -1,6 +1,7 @@
-﻿body {
-    height: 1100px;
+﻿main{
+    height: 110vh;
 }
+
 
 #titulo {
     margin-left: 20px;
@@ -314,7 +315,6 @@ h3 {
 a {
     text-decoration: none;
 }
-
     .navigation-auto-min div:not(:last-child) {
         margin-right: 10px;
     }
@@ -485,12 +485,4 @@ a {
 
 
 
-footer {
-    margin-top: auto;
-    position: relative;
-    bottom: 0;
-    left: 43%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-}
+

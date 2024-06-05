@@ -1,12 +1,11 @@
-﻿body {
-    height: 100%;
-}
-
-
-
+﻿
 .mom-categorias {
     margin: auto;
     width: 1200px;
+}
+
+main{
+    height: 220vh;
 }
 
 #title-categoria {
@@ -285,7 +284,7 @@ h3 {
 }
 
 #radio2-min:checked ~ .first {
-    margin-left: -7%;
+    margin-left: -20%;
 }
 
 #radio3-min:checked ~ .first {
@@ -480,7 +479,4 @@ h3 {
     font-weight: 600;
 }
 
-main {
-    height: 200vh;
-}
 

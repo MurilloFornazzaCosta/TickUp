@@ -7,10 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TickUp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TickUp.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
@@ -30,7 +27,7 @@
             </a>
           <ul class="nav nav-pills">
     <li class="nav-item">
-        <a asp-controller="Evento" asp-action="CriarEvento" class="nav-link">Criar evento</a>
+        <a asp-controller="Evento" asp-action="CriarEvento" id="nav-link" class="nav-link">Criar evento</a>
     </li>
 </ul>
 
@@ -38,10 +35,10 @@
                 @if (Context.Session.GetString("user") == null)
                 {
                     <a asp-controller="Usuario" asp-action="Login">
-                        <button type="button" class="btn btn-outline-primary me-2">Entrar</button>
+                        <button type="button" id="btn" class="btn btn-outline-primary me-2">Entrar</button>
                     </a>
                     <a asp-controller="Usuario" asp-action="Cadastrar">
-                        <button type="button" class="btn btn-primary">Cadastrar</button>
+                        <button type="button" id="btn" class="btn btn-primary">Cadastrar</button>
                     </a>
                 }
                 else
@@ -91,7 +88,7 @@
             @RenderBody()
         </main>
     </div>
-@* 
+
     <footer class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
             <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
@@ -102,7 +99,7 @@
             </a>
             <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Cyber Squad</span>
         </div>
-    </footer> *@
+    </footer> 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

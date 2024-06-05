@@ -394,10 +394,13 @@ namespace TickUp.Models
 
                         eventosShows.Add(evento);
 
-                        return eventosShows;
+                        
 
                     }
+
                     con.Close();
+
+                   
 
                 }
             }
@@ -480,11 +483,11 @@ namespace TickUp.Models
 
                         eventosRestaurantes.Add(evento);
 
-                        return eventosRestaurantes;
+                        
 
                     }
                     con.Close();
-
+                   
                 }
             }
             catch (Exception ex)
@@ -566,11 +569,11 @@ namespace TickUp.Models
 
                         eventosPalestras.Add(evento);
 
-                        return eventosPalestras;
+                        
 
                     }
                     con.Close();
-
+                   
                 }
             }
             catch (Exception ex)
@@ -653,11 +656,11 @@ namespace TickUp.Models
 
                         eventosTeatros.Add(evento);
 
-                        return eventosTeatros;
+                        
 
                     }
                     con.Close();
-
+            
                 }
             }
             catch (Exception ex)
@@ -739,11 +742,11 @@ namespace TickUp.Models
 
                         eventosStandUp.Add(evento);
 
-                        return eventosStandUp;
+                        
 
                     }
                     con.Close();
-
+                    
                 }
             }
             catch (Exception ex)

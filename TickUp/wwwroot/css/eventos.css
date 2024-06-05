@@ -1,6 +1,6 @@
 ﻿
 main {
-    height: 160vh;
+    height: 190vh;
 }
 
 .img_especifica-fundo {
@@ -98,18 +98,18 @@ h3 {
     font-size: 18px;
     letter-spacing: 1px;
     text-decoration: none;
-    color: #725AC1;
+    color: #339989;
     background: transparent;
     cursor: pointer;
     transition: ease-out 0.5s;
-    border: 2px solid #725AC1;
+    border: 2px solid #339989;
     border-radius: 10px;
-    box-shadow: inset 0 0 0 0 #725AC1;
+    box-shadow: inset 0 0 0 0 #339989;
 }
 
     .bt_comprar:hover {
-        color: white;
-        box-shadow: inset 0 -100px 0 0 #725AC1;
+        color: #339989;
+        box-shadow: inset 0 -100px 0 0 #7DE2D1;
     }
 
     .bt_comprar:active {
@@ -132,12 +132,14 @@ h3 {
 
 
 
-#minus {
-    color: #725AC1;
-    box-shadow: inset 0 0 0 0 #725AC1;
+
+
+.minus {
+    color: #339989;
+    box-shadow: inset 0 0 0 0 #339989;
     transition: ease-out 0.5s;
     background: transparent;
-    border: 2px solid #725AC1;
+    border: 2px solid #339989;
     font-size: 18px;
     border-radius: 10px;
     padding: 5px;
@@ -146,21 +148,21 @@ h3 {
     margin-right: 5px;
 }
 
-    #minus:hover {
-        color: white;
-        box-shadow: inset 0 -100px 0 0 #725AC1;
+    .minus:hover {
+        color: #339989;
+        box-shadow: inset 0 -100px 0 0 #7DE2D1;
     }
 
-    #minus:active {
+    .minus:active {
         transform: scale(0.8);
     }
 
-#plus {
-    color: #725AC1;
-    box-shadow: inset 0 0 0 0 #725AC1;
+.plus {
+    color: #339989;
+    box-shadow: inset 0 0 0 0 #339989;
     transition: ease-out 0.5s;
     background: transparent;
-    border: 2px solid #725AC1;
+    border: 2px solid #339989;
     font-size: 18px;
     border-radius: 10px;
     padding: 5px;
@@ -169,11 +171,21 @@ h3 {
     margin-left: 5px;
 }
 
-    #plus:hover {
-        color: white;
-        box-shadow: inset 0 -100px 0 0 #725AC1;
+    .plus:hover {
+        color: #339989;
+        box-shadow: inset 0 -100px 0 0 #7DE2D1;
     }
 
-    #plus:active {
+    .plus:active {
         transform: scale(0.8);
     }
+
+footer {
+    margin-top: 300px;
+    position: relative;
+    bottom: 0;
+    left: 35%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+}

@@ -2,6 +2,28 @@
     height: 100%;
 }
 
+#nav-link {
+    color: #339989;
+}
+
+    #nav-link:hover {
+        color: #7DE2D1;
+    }
+
+#btn {
+    color: #339989;
+    background-color: #FFFAFB;
+    border-color: #339989;
+}
+
+    #btn:hover {
+        color: #339989;
+        background-color: #7DE2D1;
+        border-color: #339989;
+    }
+
+
+
 #titulo {
     font-family: "Poetsen One", sans-serif;
     font-weight: 400;
@@ -13,9 +35,6 @@ a {
     text-decoration: none;
 }
 
-main{
-    height: 80ph;
-}
 
 .menuVertical {
     z-index: 10;
@@ -29,7 +48,7 @@ footer {
     margin-top: 0 auto;
     position: relative;
     bottom: 0;
-    left: 35%;
+    left: 38%;
     transform: translateX(-50%);
     width: 100%;
     text-align: center;

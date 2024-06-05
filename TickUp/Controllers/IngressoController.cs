@@ -89,7 +89,7 @@ namespace TickUp.Controllers
                         }
 
                         // Após o processamento dos ingressos, redirecionar para outra ação
-                        return RedirectToAction("MostrarEvento", "Home");
+                        return RedirectToAction();
                     }
 
             }
