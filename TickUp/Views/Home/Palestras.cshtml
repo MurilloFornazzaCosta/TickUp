@@ -35,11 +35,22 @@
                 <input type="radio" name="radio-btn-min" id="radio4-min">
                 <!--fim radio buttons-->
                 <!--slide images-->
+                
+
+                <div class="card first">
+                    <div class="card-image"> <img class="img_evento_min" src="/images/palestraimg.jpeg" alt=""> </div>
+                    <div class="data"> 01/11/2024 </div>
+                    <div class="heading">
+                        Liderança e gestão de pessoas
+                        <div class="author">  <span class="name">Auditório do Tribunal de Contas Do Estado de Amazonas</span> </div>
+                    </div>
+                </div>
+
                 @foreach (var item in Model)
                 {
                     string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
                     <a href="@Url.Action("MostrarEvento", new { id = item.IdEvento })">
-                        <div class="card first">
+                        <div class="card">
                             <div class="card-image"> <img class="img_evento_min" src=@formato alt=""> </div>
                             <div class="data">
                                 @Html.DisplayFor(modelItem => item.DataInicio)
@@ -54,23 +65,7 @@
 
                 }
 
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
+                
 
 
 
@@ -107,32 +102,32 @@
                 <!--slide images-->
 
                 <div class="card first">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
+                    <div class="card-image"> <img class="img_evento_min" src="/images/palestraimg.jpeg" alt=""> </div>
+                    <div class="data"> 01/11/2024 </div>
                     <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
+                        Liderança e gestão de pessoas
+                        <div class="author">  <span class="name">Auditório do Tribunal de Contas Do Estado de Amazonas</span> </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
+                @foreach (var item in Model)
+                {
+                    string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
+                    <a href="@Url.Action("MostrarEvento", new { id = item.IdEvento })">
+                        <div class="card first">
+                            <div class="card-image"> <img class="img_evento_min" src=@formato alt=""> </div>
+                            <div class="data">
+                                @Html.DisplayFor(modelItem => item.DataInicio)
+                            </div>
+                            <div class="heading">
+                                @Html.DisplayFor(modelItem => item.NomeEvento)
 
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
+                                <div class="author">  <span class="name"> @Html.DisplayFor(modelItem => item.NomeLocal) </span> </div>
+                            </div>
+                        </div>
+                    </a>
 
+                }
 
 
                 <!--fim slide images-->

@@ -38,13 +38,14 @@
                 <!--slide images-->
 
                 <div class="card first">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img1.jpg" alt=""> </div>
-                    <div class="data"> 12/06/2024 </div>
+                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
+                    <div class="data"> 22/07/2024 </div>
                     <div class="heading">
-                        Pop-Show
-                        <div class="author">  <span class="name">Kitnetbar</span> </div>
+                        Funk anos 2000
+                        <div class="author">  <span class="name">Brasuca</span> </div>
                     </div>
                 </div>
+
                 @foreach (var item in Model)
                 {
                     string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
@@ -101,31 +102,34 @@
                 <!--slide images-->
 
                 <div class="card first">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
+                    <div class="card-image"> <img class="img_evento_min" src="/images/img1.jpg" alt=""> </div>
+                    <div class="data"> 12/06/2024 </div>
                     <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
+                        Pop-Show
+                        <div class="author">  <span class="name">Kitnetbar</span> </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
+                @foreach (var item in Model)
+                {
+                    string formato = "data:image/jpeg;base64," + Convert.ToBase64String(item.BytesImagem);
+                    <a href="@Url.Action("MostrarEvento", new { id = item.IdEvento })">
+                        <div class="card">
+                            <div class="card-image"> <img class="img_evento_min" src=@formato alt=""> </div>
+                            <div class="data">
+                                @Html.DisplayFor(modelItem => item.DataInicio)
+                            </div>
+                            <div class="heading">
+                                @Html.DisplayFor(modelItem => item.NomeEvento)
 
-                <div class="card">
-                    <div class="card-image"> <img class="img_evento_min" src="/images/img2.jpg" alt=""> </div>
-                    <div class="data"> Data do evento </div>
-                    <div class="heading">
-                        Nome do evento
-                        <div class="author">  <span class="name">Local do evento</span> </div>
-                    </div>
-                </div>
+                                <div class="author">  <span class="name"> @Html.DisplayFor(modelItem => item.NomeLocal) </span> </div>
+                            </div>
+                        </div>
+                    </a>
+
+                }
+
+                
 
 
 
